@@ -37,7 +37,10 @@ function MyEmployBox() {
   return (
     <div>
       {businessData.map((business) => (
-        <MyEmployBoxWrapper key={business.businessId}>
+        <MyEmployBoxWrapper
+          $recruitState={business.recruitState}
+          key={business.businessId}
+        >
           <BoxContent>
             <ContentInfo>
               <BaseInfo>
@@ -53,13 +56,18 @@ function MyEmployBox() {
               </BusinessTypeBox>
             </ContentInfo>
             <BtnWrapper>
-              <StatusText>{business.recruitState}</StatusText>
+              <StatusText $recruitState={business.recruitState}>
+                {business.recruitState === "마감"
+                  ? "현재 마감되었어요"
+                  : "현재 구인중이에요"}
+              </StatusText>
               <StatusBtn
+                $recruitState={business.recruitState}
                 onClick={() => {
                   updateRecruitState(business.businessId);
                 }}
               >
-                구인마감
+                {business.recruitState === "마감" ? "다시구인" : "구인마감"}
               </StatusBtn>
             </BtnWrapper>
           </BoxContent>
@@ -72,6 +80,8 @@ function MyEmployBox() {
 export default MyEmployBox;
 
 const MyEmployBoxWrapper = styled.div`
+  background-color: ${({ $recruitState, theme }) =>
+    $recruitState === "마감" ? theme.color.grayscale_EE : theme.color.white};
   width: 335px;
   height: 172px;
   border-radius: 8px;
@@ -139,7 +149,10 @@ const BtnWrapper = styled.div`
 `;
 
 const StatusText = styled.p`
-  color: ${({ theme }) => theme.color.primary_normal};
+  color: ${({ $recruitState, theme }) =>
+    $recruitState === "마감"
+      ? theme.color.grayscale_66
+      : theme.color.primary_normal};
   font-size: ${({ theme }) => theme.fontSize.body2};
   font-weight: ${({ theme }) => theme.fontWeight.bold};
 `;
@@ -151,7 +164,10 @@ const StatusBtn = styled.button`
   justify-content: center;
   align-items: center;
   border-radius: 8px;
-  background-color: ${({ theme }) => theme.color.primary_normal};
+  background-color: ${({ $recruitState, theme }) =>
+    $recruitState === "마감"
+      ? theme.color.grayscale_66
+      : theme.color.primary_normal};
   color: ${({ theme }) => theme.color.white};
   font-size: ${({ theme }) => theme.fontSize.caption1};
 `;

@@ -181,14 +181,16 @@ function Main() {
           >
             구인하기
           </MainPageBtn>
-          <MainPageBtn
-            disabled={!isEmployer}
-            onClick={() => {
-              navigate("/employ-list");
-            }}
-          >
-            내가쓴글
-          </MainPageBtn>
+          {isEmployer && (
+            <MainPageBtn
+              disabled={!isEmployer}
+              onClick={() => {
+                navigate("/employ-list");
+              }}
+            >
+              내가쓴글
+            </MainPageBtn>
+          )}
         </BtnWrapper>
         {/* 지도자리  시작*/}
         <div className="App">

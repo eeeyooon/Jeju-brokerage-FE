@@ -38,6 +38,15 @@ const EmployListWrapper = styled.div`
   background-color: ${({ theme }) => theme.color.white};
   user-select: none;
 
+  padding-bottom: 30px;
+
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
   header {
     height: 52px;
     width: 375px;

@@ -1,17 +1,53 @@
 import React from "react";
 import PreviewEmployContent from "./PreviewEmployContent";
+import { styled } from "styled-components";
 
 function PreviewEmployBox() {
   return (
     <div>
-      <h1>지도에서 마커 클릭 시 간단하게 구인 공고 정보를 조회하는 카드</h1>
       <PreviewEmployContent />
-      <div>
-        <button>상세보기</button>
-        <button>전화하기</button>
-      </div>
+      <BtnWrapper>
+        <DetailBtn>상세보기</DetailBtn>
+        <CallBtn>전화하기</CallBtn>
+      </BtnWrapper>
     </div>
   );
 }
 
 export default PreviewEmployBox;
+
+const BtnWrapper = styled.div`
+  margin-top: 20px;
+  width: 335px;
+  height: 48px;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 20px;
+`;
+
+const DetailBtn = styled.button`
+  width: 164px;
+  height: 48px;
+  padding: 10px 24px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  border: 1px solid ${({ theme }) => theme.color.primary_normal};
+  background-color: ${({ theme }) => theme.color.white};
+  color: ${({ theme }) => theme.color.primary_normal};
+  font-size: ${({ theme }) => theme.fontSize.caption1};
+`;
+
+const CallBtn = styled.button`
+  width: 164px;
+  height: 48px;
+  padding: 8px 19px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background-color: ${({ theme }) => theme.color.primary_normal};
+  color: ${({ theme }) => theme.color.white};
+  font-size: ${({ theme }) => theme.fontSize.caption1};
+`;

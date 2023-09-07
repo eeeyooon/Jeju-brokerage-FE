@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
+import PreviewEmploy from "../components/PreviewEmploy";
 
 function Main() {
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ function Main() {
           구인 공고 자세히보기
         </NavigateBtn>
       </NavBtnWrapper>
+      <PreviewEmploy />
     </MainWrapper>
   );
 }

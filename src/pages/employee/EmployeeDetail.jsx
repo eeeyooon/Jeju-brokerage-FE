@@ -1,10 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { styled } from "styled-components";
 import PreviewEmployContent from "../../components/PreviewEmployContent";
 import EmployContent from "../../components/EmployContent";
 import BigButton from "../../components/BigButton";
 
-function EmployeeDetail() {
+function EmployeeDetail({ memberId }) {
+  const [businesse, setBusinesse] = useState();
+
+  useEffect(() => {
+    const response = axios
+      .get(
+        `https://user-app.krampoline.com/k77c33daa3a48a/business/${memberId}`
+      )
+      .then((response) => {
+        setBusinesse(response.data);
+
+        console.log(businesse);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [memberId]);
+
   return (
     <EmployDetailWrapper>
       <h1>(구직자)구인 공고 자세히 보기</h1>

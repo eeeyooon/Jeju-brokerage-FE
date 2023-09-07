@@ -1,16 +1,21 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
+import MyEmployBox from "./../../components/MyEmployBox";
 
 function EmployList() {
-  const navigate = useNavigate();
-
   return (
     <EmployListWrapper>
-      <h1>작성한 구인공고 목록 페이지</h1>
-      <button onClick={() => navigate("/employ-detail")}>
-        구인공고 자세히 보기
-      </button>
+      <header>
+        <button>뒤로가기버튼</button>
+        <h1>
+          김복자님의<p>구인 목록이에요</p>
+        </h1>
+      </header>
+      <div className="EmployBoxWrapper">
+        <MyEmployBox />
+        <MyEmployBox />
+        <MyEmployBox />
+      </div>
     </EmployListWrapper>
   );
 }

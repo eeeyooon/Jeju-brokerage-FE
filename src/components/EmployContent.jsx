@@ -1,57 +1,74 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { styled } from "styled-components";
+import axios from "axios";
 
-function EmployContent() {
+function EmployContent({ clickedBusiness }) {
+  const [clickedData, setClickedData] = useState(clickedBusiness);
+  const [business, setBusiness] = useState();
+
+  useEffect(() => {
+    axios
+      .get(
+        `https://user-app.krampoline.com/k77c33daa3a48a/business/${clickedData.clickedBusiness.businessId}`
+      )
+      .then((response) => {
+        setBusiness(response.data);
+      });
+  }, [clickedData]);
+
   return (
     <EmployContentWrapper>
-      <EmployConditionWrapper>
-        <h2>근무 조건</h2>
-        <WorkDateWrapper>
-          <WorkDateBox>
-            <SubTitleWrapper>
-              <img
-                alt="달력 아이콘"
-                src={process.env.PUBLIC_URL + "/assets/calendar.svg"}
-              />
-              <h3>근무 시작일</h3>
-            </SubTitleWrapper>
-            <p>2023-11-10</p>
-          </WorkDateBox>
-          <WorkDateBox>
-            <SubTitleWrapper>
-              <img
-                alt="달력 아이콘"
-                src={process.env.PUBLIC_URL + "/assets/calendar.svg"}
-              />
-              <h3>근무 종료일</h3>
-            </SubTitleWrapper>
-            <p>2023-12-10</p>
-          </WorkDateBox>
-        </WorkDateWrapper>
-        <WorkTimeWrapper>
-          <SubTitleWrapper>
-            <img
-              alt="시계 아이콘"
-              src={process.env.PUBLIC_URL + "/assets/time.svg"}
-            />
-            <h3>근무 시간</h3>
-          </SubTitleWrapper>
-          <p>09:00 ~ 18:00</p>
-        </WorkTimeWrapper>
-      </EmployConditionWrapper>
-      <SalaryWrapper>
-        <h2>급여 조건</h2>
-        <SalaryText>
-          월급 <span>2,600,000원</span>
-        </SalaryText>
-      </SalaryWrapper>
-      <DetailContentWrapper>
-        <h2>상세 내용</h2>
-        <DetailContent>
-          서귀포에 작은 감귤 농장입니다. 성별무관하고 힘쎈 사람 구합니다. 중식,
-          석식 제공하고 숙박은 제공하지 않습니다. 서귀포에 작은 감귤 농장입니다.
-        </DetailContent>
-      </DetailContentWrapper>
+      {business != null && (
+        <>
+          <EmployConditionWrapper>
+            <h2>근무 조건</h2>
+            <WorkDateWrapper>
+              <WorkDateBox>
+                <SubTitleWrapper>
+                  <img
+                    alt="달력 아이콘"
+                    src={process.env.PUBLIC_URL + "/assets/calendar.svg"}
+                  />
+                  <h3>근무 시작일</h3>
+                </SubTitleWrapper>
+                <p>{business.workStartDate}</p>
+              </WorkDateBox>
+              <WorkDateBox>
+                <SubTitleWrapper>
+                  <img
+                    alt="달력 아이콘"
+                    src={process.env.PUBLIC_URL + "/assets/calendar.svg"}
+                  />
+                  <h3>근무 종료일</h3>
+                </SubTitleWrapper>
+                <p>{business.workFinishDate}</p>
+              </WorkDateBox>
+            </WorkDateWrapper>
+            <WorkTimeWrapper>
+              <SubTitleWrapper>
+                <img
+                  alt="시계 아이콘"
+                  src={process.env.PUBLIC_URL + "/assets/time.svg"}
+                />
+                <h3>근무 시간</h3>
+              </SubTitleWrapper>
+              <p>
+                {business.workStartTime} ~ {business.workFinishDate}
+              </p>
+            </WorkTimeWrapper>
+          </EmployConditionWrapper>
+          <SalaryWrapper>
+            <h2>급여 조건</h2>
+            <SalaryText>
+              {business.salaryType} <span>{business.salary}원</span>
+            </SalaryText>
+          </SalaryWrapper>
+          <DetailContentWrapper>
+            <h2>상세 내용</h2>
+            <DetailContent>{business.businessDetail}</DetailContent>
+          </DetailContentWrapper>
+        </>
+      )}
     </EmployContentWrapper>
   );
 }

@@ -3,10 +3,9 @@ import PreviewEmployContent from "./PreviewEmployContent";
 import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-function PreviewEmployBox({ clickedBusiness, handleModal }) {
+function PreviewEmployBox({ clickedBusiness }) {
   const [clickedData, setClickedData] = useState(clickedBusiness);
   const navigate = useNavigate();
-  console.log(clickedBusiness.businessId);
 
   return (
     <div>
@@ -15,19 +14,13 @@ function PreviewEmployBox({ clickedBusiness, handleModal }) {
         <DetailBtn
           onClick={() => {
             navigate("/employee-detail", {
-              state: { businessId: clickedBusiness.businessId },
+              state: { clickedBusiness: clickedData },
             });
           }}
         >
           상세보기
         </DetailBtn>
-        <CallBtn
-          onClick={() => {
-            handleModal(true);
-          }}
-        >
-          전화하기
-        </CallBtn>
+        <CallBtn>전화하기</CallBtn>
       </BtnWrapper>
     </div>
   );

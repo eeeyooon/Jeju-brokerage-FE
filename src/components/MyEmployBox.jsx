@@ -18,6 +18,20 @@ function MyEmployBox() {
       });
   }, []);
 
+  const updateRecruitState = (businessId) => {
+    axios
+      .put(
+        `https://user-app.krampoline.com/k77c33daa3a48a/business/${businessId}`
+      )
+      .then((response) => {
+        setBusinessData(response.data);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
     <div>
       {businessData.map((business) => (
@@ -38,7 +52,7 @@ function MyEmployBox() {
             </ContentInfo>
             <BtnWrapper>
               <StatusText>{business.recruitState}</StatusText>
-              <SmallButton text="구인마감" />
+              <StatusBtn>구인마감</StatusBtn>
             </BtnWrapper>
           </BoxContent>
         </MyEmployBoxWrapper>
@@ -120,4 +134,16 @@ const StatusText = styled.p`
   color: ${({ theme }) => theme.color.primary_normal};
   font-size: ${({ theme }) => theme.fontSize.body2};
   font-weight: ${({ theme }) => theme.fontWeight.bold};
+`;
+
+const StatusBtn = styled.button`
+  height: 36px;
+  padding: 8px 19px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background-color: ${({ theme }) => theme.color.primary_normal};
+  color: ${({ theme }) => theme.color.white};
+  font-size: ${({ theme }) => theme.fontSize.caption1};
 `;

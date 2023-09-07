@@ -1,11 +1,11 @@
 import React from "react";
 import { styled } from "styled-components";
 
-const BigButton = ({ text }) => {
+const BigButton_light = ({ text }) => {
   return <ButtonBox>{text}</ButtonBox>;
 };
 
-export default BigButton;
+export default BigButton_light;
 
 const ButtonBox = styled.button`
   height: 48px;
@@ -14,7 +14,8 @@ const ButtonBox = styled.button`
   justify-content: center;
   align-items: center;
   border-radius: 8px;
-  background-color: ${({ theme }) => theme.color.primary_normal};
-  color: ${({ theme }) => theme.color.white};
+  border: 1px solid ${({ theme }) => theme.color.primary_normal};
+  background-color: ${({ theme }) => theme.color.white};
+  color: ${({ theme }) => theme.color.primary_normal};
   font-size: ${({ theme }) => theme.fontSize.body1};
 `;

@@ -5,10 +5,10 @@ import { styled } from "styled-components";
 
 const handleUserUpdate = async (useremail, username) => {
   try {
-    await axios.post(
-      `https://user-app.krampoline.com/k77c33daa3a48a/member/login`,
+    const response = await axios.post(
+      `/member/login`,
       {
-        name: username,
+        username: username,
         email: useremail,
       },
       {
@@ -17,6 +17,9 @@ const handleUserUpdate = async (useremail, username) => {
         },
       }
     );
+    console.log(response.data);
+    localStorage.setItem("memberId", response.data.userId);
+    localStorage.setItem("userType", response.data.userType);
   } catch (error) {
     console.error(error);
   }
@@ -45,19 +48,16 @@ function Login() {
               url: "/v2/user/me",
               success: (res) => {
                 const kakao_account = res.kakao_account;
-
-                console.log(kakao_account);
-                // local storage save
-                localStorage.setItem("useremail", kakao_account.account_email);
+                localStorage.setItem("email", kakao_account.email);
                 localStorage.setItem(
                   "username",
-                  kakao_account.profile_nickname
+                  kakao_account.profile.nickname
                 );
+
                 handleUserUpdate(
-                  kakao_account.account_email,
-                  kakao_account.profile_nickname
+                  kakao_account.email,
+                  kakao_account.profile.nickname
                 );
-                console.log(kakao_account);
               },
             });
           },

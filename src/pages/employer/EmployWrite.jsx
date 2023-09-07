@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import BigButton from "../../components/BigButton";
 import DaumPost from "../../components/DaumPost";
+import axios from "axios";
 
 function EmployWrite() {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,8 +21,9 @@ function EmployWrite() {
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
   const recruitState = "모집중";
-
+  const userId = localStorage.getItem("memberId");
   const data = {
+    userId,
     businessName,
     businessNumber,
     address,
@@ -39,9 +41,53 @@ function EmployWrite() {
     recruitState,
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "https://dapi.kakao.com/v2/local/search/address.json",
+          {
+            headers: {
+              Authorization: `KakaoAK f7774b37f25f92a00c923157aa73cd38`,
+            },
+            params: {
+              query: "제주특별자치도 서귀포시 성산읍 일주동로 4282",
+            },
+          }
+        );
+        setLatitude(response.data.documents[0].x);
+        setLongitude(response.data.documents[0].y);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [address]);
+
   // DaumPost 컴포넌트에서 받은 fullAddress를 처리하는 함수
   const handleAddressChange = (newAddress) => {
     setAddress(newAddress);
+  };
+
+  const handleSubmit = async () => {
+    console.log(data);
+
+    try {
+      const response = await axios.post(
+        `https://user-app.krampoline.com/k77c33daa3a48a/business`,
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
     <EmployWriteWrapper>
@@ -221,7 +267,7 @@ function EmployWrite() {
         </BusinessDetailWrapper>
       </EmployForm>
       <ButtonWrapper>
-        <CreateAbleBtn>등록하기</CreateAbleBtn>
+        <CreateAbleBtn onClick={handleSubmit}>등록하기</CreateAbleBtn>
       </ButtonWrapper>
     </EmployWriteWrapper>
   );

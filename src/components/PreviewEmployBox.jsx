@@ -6,10 +6,11 @@ import { useNavigate } from "react-router-dom";
 function PreviewEmployBox({ clickedBusiness }) {
   const [clickedData, setClickedData] = useState(clickedBusiness);
   const navigate = useNavigate();
+  const isPreview = true;
 
   return (
     <div>
-      <PreviewEmployContent clickedData={clickedData} />
+      <PreviewEmployContent isPreview={isPreview} clickedData={clickedData} />
       <BtnWrapper>
         <DetailBtn
           onClick={() => {

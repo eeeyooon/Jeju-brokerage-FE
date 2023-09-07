@@ -73,7 +73,6 @@ function Main() {
         };
 
         const map = new kakao.maps.Map(container, options);
-
         businesses.forEach((business) => {
           const imageSrc = handleTotalWork(business.totalWorkDate);
           const imageSize = new kakao.maps.Size(50, 60); // 마커이미지의 크기입니다

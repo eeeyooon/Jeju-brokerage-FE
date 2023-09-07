@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { styled } from "styled-components";
 
@@ -26,6 +27,7 @@ const handleUserUpdate = async (useremail, username) => {
 };
 
 function Login() {
+  const navigate = useNavigate();
   /// 카카오 로그인
   useEffect(() => {
     // Kakao SDK 스크립트 로드
@@ -58,6 +60,8 @@ function Login() {
                   kakao_account.email,
                   kakao_account.profile.nickname
                 );
+
+                navigate("/main");
               },
             });
           },

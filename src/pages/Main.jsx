@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import { styled } from "styled-components";
 import PreviewEmployBox from "../components/PreviewEmployBox";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Main() {
   const [businesses, setBusinesses] = useState([]);
   const [clickedBusiness, setClickedBusiness] = useState();
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -140,7 +142,13 @@ function Main() {
           </MarkInfoBackground>
         </MainPageContentWrapper>
         <BtnWrapper>
-          <MainPageBtn>구인하기</MainPageBtn>
+          <MainPageBtn
+            onClick={() => {
+              navigate("/employ-write");
+            }}
+          >
+            구인하기
+          </MainPageBtn>
           <MainPageBtn>내가쓴글</MainPageBtn>
         </BtnWrapper>
         {/* 지도자리  시작*/}

@@ -4,7 +4,7 @@ import { styled } from "styled-components";
 
 //business id를 받아와서 porps 처리하기
 function PreviewEmployContent({ businessId }) {
-  const [business, setBusinesse] = useState();
+  const [business, setBusiness] = useState();
 
   // useEffect(() => {
   //   const response = axios
@@ -101,4 +101,5 @@ const PeriodText = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 4px;
+  border-radius: 5px;
 `;

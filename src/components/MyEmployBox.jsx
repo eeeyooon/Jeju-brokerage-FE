@@ -14,7 +14,12 @@ function MyEmployBox() {
               제주 서귀포시 성산읍 동류앙로 38(성산읍 고성리) 38-1번길 301호
             </InfoText>
           </BaseInfo>
-          <BusinessTypeBox>농업</BusinessTypeBox>
+          <BusinessTypeBox>
+            <img
+              alt="업종 아이콘"
+              src={process.env.PUBLIC_URL + "/assets/Farm.svg"}
+            />
+          </BusinessTypeBox>
         </ContentInfo>
         <BtnWrapper>
           <StatusText>현재 구인중이에요</StatusText>

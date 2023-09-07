@@ -6,7 +6,7 @@ import { styled } from "styled-components";
 const handleUserUpdate = async (useremail, username) => {
   try {
     await axios.post(
-      `http://127.0.0.1:8080/auth`,
+      `https://user-app.krampoline.com/k77c33daa3a48a/member/login`,
       {
         name: username,
         email: useremail,

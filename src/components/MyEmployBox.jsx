@@ -1,34 +1,52 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { styled } from "styled-components";
 import SmallButton from "./SmallButton";
+import axios from "axios";
 
 function MyEmployBox() {
+  const [businessData, setBusinessData] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://user-app.krampoline.com/k77c33daa3a48a/business/member/1")
+      .then((response) => {
+        setBusinessData(response.data);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
   return (
-    <MyEmployBoxWrapper>
-      <BoxContent>
-        <ContentInfo>
-          <BaseInfo>
-            <h1>귤 나와라 뚝딱</h1>
-            <InfoText className="name">김복자</InfoText>
-            <InfoText className="address">
-              제주 서귀포시 성산읍 동류앙로 38(성산읍 고성리) 38-1번길 301호
-            </InfoText>
-          </BaseInfo>
-          <BusinessTypeBox>
-            <img
-              alt="업종 아이콘"
-              src={process.env.PUBLIC_URL + "/assets/Farm.svg"}
-            />
-          </BusinessTypeBox>
-        </ContentInfo>
-        <BtnWrapper>
-          <StatusText>현재 구인중이에요</StatusText>
-          <SmallButton text="구인마감" />
-        </BtnWrapper>
-      </BoxContent>
-    </MyEmployBoxWrapper>
+    <div>
+      {businessData.map((business) => (
+        <MyEmployBoxWrapper key={business.businessId}>
+          <BoxContent>
+            <ContentInfo>
+              <BaseInfo>
+                <h1>{business.businessName}</h1>
+                <InfoText className="name">{business.businessName}</InfoText>
+                <InfoText className="address">{business.address}</InfoText>
+              </BaseInfo>
+              <BusinessTypeBox>
+                <img
+                  alt="업종 아이콘"
+                  src={process.env.PUBLIC_URL + "/assets/Farm.svg"}
+                />
+              </BusinessTypeBox>
+            </ContentInfo>
+            <BtnWrapper>
+              <StatusText>{business.recruitState}</StatusText>
+              <SmallButton text="구인마감" />
+            </BtnWrapper>
+          </BoxContent>
+        </MyEmployBoxWrapper>
+      ))}
+    </div>
   );
 }
+
 export default MyEmployBox;
 
 const MyEmployBoxWrapper = styled.div`

@@ -18,8 +18,6 @@ function EmployList() {
       </ListHeaderText>
       <div className="EmployBoxWrapper">
         <MyEmployBox />
-        <MyEmployBox />
-        <MyEmployBox />
       </div>
     </EmployListWrapper>
   );

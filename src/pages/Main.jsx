@@ -12,7 +12,6 @@ function Main() {
       .get("https://user-app.krampoline.com/k77c33daa3a48a/business")
       .then((response) => {
         setBusinesses(response.data);
-        console.log("Received data:", response.data);
       });
   }, []);
 
@@ -38,29 +37,58 @@ function Main() {
 
     // 스크립트 읽기 완료 후 카카오맵 설정
     my_script.then(() => {
-      console.log("script loaded!!!");
       const kakao = window["kakao"];
       kakao.maps.load(() => {
-        // 현재 위치 정보 가져오기
+        // default 지도 위치 세팅
         if ("geolocation" in navigator) {
           navigator.geolocation.getCurrentPosition(
             (position) => {
               const latitude = position.coords.latitude;
               const longitude = position.coords.longitude;
 
-              const mapContainer = document.getElementById("map");
-              const options = {
-                center: new kakao.maps.LatLng(latitude, longitude), // 현재 위치로 설정
-                level: 3,
-              };
-              const map = new kakao.maps.Map(mapContainer, options);
+              var mapContainer = document.getElementById("map"), // 지도를 표시할 div
+                mapOption = {
+                  center: new kakao.maps.LatLng(latitude, longitude), // 지도의 중심좌표
+                  level: 3, // 지도의 확대 레벨
+                };
 
-              // 현재위치 마커 설정
-              const markerPosition = new kakao.maps.LatLng(latitude, longitude);
-              const marker = new kakao.maps.Marker({
-                position: markerPosition,
+              var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+              var positions = [];
+
+              businesses.forEach((business) => {
+                positions.push({
+                  title: business.address,
+                  latlng: new kakao.maps.LatLng(
+                    business.longitude,
+                    business.latitude
+                  ),
+                });
               });
-              marker.setMap(map);
+
+              // 마커 이미지의 이미지 주소입니다
+              var imageSrc =
+                "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+
+              for (var i = 0; i < positions.length; i++) {
+                // 마커 이미지의 이미지 크기 입니다
+                var imageSize = new kakao.maps.Size(24, 35);
+
+                // 마커 이미지를 생성합니다
+                var markerImage = new kakao.maps.MarkerImage(
+                  imageSrc,
+                  imageSize
+                );
+
+                // 마커를 생성합니다
+                var marker = new kakao.maps.Marker({
+                  map: map, // 마커를 표시할 지도
+                  position: positions[i].latlng, // 마커를 표시할 위치
+                  title: positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+                  image: markerImage, // 마커 이미지
+                });
+                marker.setMap(map);
+              }
             },
             (error) => {
               console.error("Error getting geolocation:", error);
@@ -80,21 +108,6 @@ function Main() {
         <button>구인하기</button>
         <p />
         <button>내가쓴글</button>
-        <ul>
-          {/* 받아온 정보 확인 */}
-          {businesses.map((business) => (
-            <li key={business.businessId}>
-              <p>사업장명: {business.businessName}</p>
-              <p>전화번호: {business.phoneNumber}</p>
-              <p>사업 종류: {business.businessType}</p>
-              <p>모집 상태: {business.recruitState}</p>
-              <p>위도: {business.latitude}</p>
-              <p>경도: {business.longitude}</p>
-              <p>주소: {business.address}</p>
-              <p>총 근무일수: {business.totalWorkDate}</p>
-            </li>
-          ))}
-        </ul>
 
         {/* 지도자리  시작*/}
         <div className="App">

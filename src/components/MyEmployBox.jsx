@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { styled } from "styled-components";
-import SmallButton from "./SmallButton";
 import axios from "axios";
 
 function MyEmployBox() {
   const [businessData, setBusinessData] = useState([]);
 
   useEffect(() => {
+    const memberId = localStorage.getItem("memberId");
+
     axios
-      .get("https://user-app.krampoline.com/k77c33daa3a48a/business/member/1")
+      .get(
+        `https://user-app.krampoline.com/k77c33daa3a48a/business/member/${memberId}`
+      )
       .then((response) => {
         setBusinessData(response.data);
         console.log(response.data);
@@ -24,7 +27,6 @@ function MyEmployBox() {
         `https://user-app.krampoline.com/k77c33daa3a48a/business/${businessId}`
       )
       .then((response) => {
-        setBusinessData(response.data);
         console.log(response.data);
       })
       .catch((error) => {
@@ -52,7 +54,13 @@ function MyEmployBox() {
             </ContentInfo>
             <BtnWrapper>
               <StatusText>{business.recruitState}</StatusText>
-              <StatusBtn>구인마감</StatusBtn>
+              <StatusBtn
+                onClick={() => {
+                  updateRecruitState(business.businessId);
+                }}
+              >
+                구인마감
+              </StatusBtn>
             </BtnWrapper>
           </BoxContent>
         </MyEmployBoxWrapper>

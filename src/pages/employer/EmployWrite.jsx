@@ -506,6 +506,15 @@ const CreateAbleBtn = styled.button`
   font-size: ${({ theme }) => theme.fontSize.body1};
 `;
 
+const CreateDisableBtn = styled.button`
+  width: 335px;
+  height: 48px;
+  border-radius: 8px;
+  color: ${({ theme }) => theme.color.grayscale_BD};
+  background-color: ${({ theme }) => theme.color.grayscale_EE};
+  font-size: ${({ theme }) => theme.fontSize.body1};
+`;
+
 const SearchModalWrapper = styled.div`
   width: 375px;
   position: absolute;

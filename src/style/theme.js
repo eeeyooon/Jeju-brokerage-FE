@@ -1,6 +1,6 @@
 export const theme = {
   color: {
-    primary_normal: "#259F82",
+    primary_normal: "#ff9922",
     one_week: "#ffc700",
     two_week: "#11BF2D",
     under_month: "#426BFF",

@@ -4,9 +4,9 @@ import { theme } from "./style/theme";
 import { GlobalStyles } from "./style/global";
 import Login from "./pages/Login";
 import Main from "./pages/Main";
-import EmployDetail from "./pages/EmployDetail";
-import EmployWrite from "./pages/EmployWrite";
-import EmployList from "./pages/EmployList";
+import EmployDetail from "./pages/employee/EmployDetail";
+import EmployWrite from "./pages/employer/EmployWrite";
+import EmployList from "./pages/employer/EmployList";
 
 function App() {
   return (

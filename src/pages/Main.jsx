@@ -98,12 +98,51 @@ function Main() {
       )}
       <div>
         <MainPageContentWrapper>
-          <ServiceTitle>일 있수꽝</ServiceTitle>
-          <p> 단기 장기 </p>
-          <button>구인하기</button>
-          <p />
-          <button>내가쓴글</button>
+          <ServiceTitle>
+            <img
+              alt="서비스 로고"
+              src={process.env.PUBLIC_URL + "/assets/mainpage_logo.svg"}
+            />
+          </ServiceTitle>
+          <MarkInfoBackground>
+            <MarkInfoWrapper>
+              <MarkInfo>
+                <img
+                  alt="1주 이하"
+                  src={process.env.PUBLIC_URL + "/assets/oneweek_circle.svg"}
+                />
+                <span>1주 이하</span>
+              </MarkInfo>
+              <MarkInfo>
+                <img
+                  alt="2주 이하"
+                  src={process.env.PUBLIC_URL + "/assets/twoweek_circle.svg"}
+                />
+                <span>1~2주</span>
+              </MarkInfo>
+              <MarkInfo>
+                <img
+                  alt="한달 이내"
+                  src={
+                    process.env.PUBLIC_URL + "/assets/under_month_circle.svg"
+                  }
+                />
+                <span>2주~한달</span>
+              </MarkInfo>
+              <MarkInfo>
+                <img
+                  alt="한달 이상"
+                  src={process.env.PUBLIC_URL + "/assets/over_month_circle.svg"}
+                />
+                <span>한달 이상</span>
+              </MarkInfo>
+            </MarkInfoWrapper>
+          </MarkInfoBackground>
         </MainPageContentWrapper>
+        <BtnWrapper>
+          <MainPageBtn>구인하기</MainPageBtn>
+          <MainPageBtn>내가쓴글</MainPageBtn>
+        </BtnWrapper>
         {/* 지도자리  시작*/}
         <div className="App">
           <div
@@ -138,7 +177,14 @@ const MainPageContentWrapper = styled.div`
   z-index: 10;
 `;
 
-const ServiceTitle = styled.h1``;
+const ServiceTitle = styled.div`
+  width: 375px;
+  height: 52px;
+  background-color: ${({ theme }) => theme.color.white};
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+`;
 
 const PreviewModal = styled.div`
   padding-top: 20px;
@@ -161,4 +207,45 @@ const CloseModalBg = styled.div`
   left: 0;
   z-index: 10;
   transform: translate(0, 0);
+`;
+
+const MarkInfoBackground = styled.div`
+  width: 375px;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+`;
+const MarkInfoWrapper = styled.div`
+  width: 290px;
+  height: 33px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.7);
+  font-size: ${({ theme }) => theme.fontSize.caption2};
+`;
+const MarkInfo = styled.div``;
+
+const BtnWrapper = styled.div`
+  position: absolute;
+  top: 13%;
+  right: 5%;
+  z-index: 10;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  height: 80px;
+`;
+
+const MainPageBtn = styled.button`
+  height: 36px;
+  padding: 8px 19px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background-color: ${({ theme }) => theme.color.primary_normal};
+  color: ${({ theme }) => theme.color.white};
+  font-size: ${({ theme }) => theme.fontSize.caption1};
 `;

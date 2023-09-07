@@ -3,6 +3,7 @@ import { styled } from "styled-components";
 import PreviewEmployBox from "../components/PreviewEmployBox";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import CallModal from "./../components/CallModal";
 
 function Main() {
   const [businesses, setBusinesses] = useState([]);
@@ -11,8 +12,13 @@ function Main() {
   const [isEmployer, setIsEmployer] = useState(
     localStorage.getItem("userType") === "구인자" ? true : false
   );
+  const [openCallModal, setOpenCallModal] = useState(false);
 
   const navigate = useNavigate();
+
+  const handleModal = (modalState) => {
+    setOpenCallModal(modalState);
+  };
 
   useEffect(() => {
     axios
@@ -20,8 +26,6 @@ function Main() {
       .then((response) => {
         setBusinesses(response.data);
       });
-
-    console.log(localStorage.getItem("userType") === "구인자");
   }, []);
 
   const new_script = (src) => {
@@ -70,8 +74,6 @@ function Main() {
 
         const map = new kakao.maps.Map(container, options);
 
-        console.log(businesses);
-
         businesses.forEach((business) => {
           const imageSrc = handleTotalWork(business.totalWorkDate);
           const imageSize = new kakao.maps.Size(50, 60); // 마커이미지의 크기입니다
@@ -111,8 +113,6 @@ function Main() {
   }, [businesses]);
 
   useEffect(() => {
-    console.log(clickedBusiness);
-
     if (clickedBusiness) {
       setIsOpenModal(true);
     }
@@ -123,8 +123,11 @@ function Main() {
   }, [clickedBusiness]);
   return (
     <MainWrapper>
+      {openCallModal && (
+        <ModalBackground onClick={() => setOpenCallModal(false)} />
+      )}
       {isOpenModal && (
-        <CloseModalBg
+        <ClosePreviewModal
           onClick={() => {
             setIsOpenModal(false);
           }}
@@ -203,8 +206,16 @@ function Main() {
         {/* 지도자리  끝*/}
         {isOpenModal && (
           <PreviewModal>
-            <PreviewEmployBox clickedBusiness={clickedBusiness} />
+            <PreviewEmployBox
+              handleModal={handleModal}
+              clickedBusiness={clickedBusiness}
+            />
           </PreviewModal>
+        )}
+        {openCallModal && (
+          <CallModalWrapper>
+            <CallModal handleModal={handleModal} />
+          </CallModalWrapper>
         )}
       </div>
     </MainWrapper>
@@ -247,7 +258,7 @@ const PreviewModal = styled.div`
   transform: translate(0, 0);
 `;
 
-const CloseModalBg = styled.div`
+const ClosePreviewModal = styled.div`
   height: 563px;
   width: 375px;
   opacity: 100%;
@@ -257,6 +268,17 @@ const CloseModalBg = styled.div`
   z-index: 10;
   transform: translate(0, 0);
 `;
+
+// const CloseCallModal = styled.div`
+//   height: 563px;
+//   width: 375px;
+//   opacity: 100%;
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   z-index: 50;
+//   transform: translate(0, 0);
+// `;
 
 const MarkInfoBackground = styled.div`
   width: 375px;
@@ -297,4 +319,26 @@ const MainPageBtn = styled.button`
   background-color: ${({ theme }) => theme.color.primary_normal};
   color: ${({ theme }) => theme.color.white};
   font-size: ${({ theme }) => theme.fontSize.caption1};
+`;
+
+const ModalBackground = styled.div`
+  background-color: #a8a8a8;
+  position: fixed;
+  height: inherit;
+  opacity: 0.65;
+  width: 375px;
+  z-index: 100;
+`;
+
+const CallModalWrapper = styled.div`
+  padding-top: 20px;
+  width: 375px;
+  height: 229px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
 `;

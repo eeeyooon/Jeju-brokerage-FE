@@ -95,7 +95,11 @@ function EmployWrite() {
     <EmployWriteWrapper>
       {isOpen && <ModalBackground onClick={() => setIsOpen(false)} />}
       <header>
-        <button>
+        <button
+          onClick={() => {
+            navigate("/main");
+          }}
+        >
           <img
             alt="뒤로가기 버튼"
             src={process.env.PUBLIC_URL + "/assets/arrow_back.svg"}
@@ -164,24 +168,39 @@ function EmployWrite() {
         <BusinessTypeWrapper>
           <TypeText>업종</TypeText>
           <TypeBtnWrapper>
-            <TypeButton>
+            <FarmButton
+              $businessType={businessType}
+              onClick={() => {
+                setBusinessType("농업");
+              }}
+            >
               <img
                 alt="농업"
                 src={process.env.PUBLIC_URL + "/assets/Farm.svg"}
               />
-            </TypeButton>
-            <TypeButton>
+            </FarmButton>
+            <FishingButton
+              $businessType={businessType}
+              onClick={() => {
+                setBusinessType("어업");
+              }}
+            >
               <img
                 alt="어업"
                 src={process.env.PUBLIC_URL + "/assets/Fishing.svg"}
               />
-            </TypeButton>
-            <TypeButton>
+            </FishingButton>
+            <EtcButton
+              $businessType={businessType}
+              onClick={() => {
+                setBusinessType("기타");
+              }}
+            >
               <img
                 alt="기타"
                 src={process.env.PUBLIC_URL + "/assets/Etc.svg"}
               />
-            </TypeButton>
+            </EtcButton>
           </TypeBtnWrapper>
         </BusinessTypeWrapper>
         <WorkDateWrapper>
@@ -447,10 +466,47 @@ const TypeBtnWrapper = styled.div`
   justify-content: space-evenly;
 `;
 
-const TypeButton = styled.button`
+const FarmButton = styled.button`
   width: 80px;
   height: 92px;
-  border: 5px;
+  border-radius: 12px;
+  border: 1px solid
+    ${({ $businessType, theme }) =>
+      $businessType === "농업"
+        ? theme.color.primary_normal
+        : theme.color.grayscale_EE};
+  border-width: ${({ $businessType, theme }) =>
+    $businessType === "농업" ? "2px" : "1px"};
+  box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.18);
+  margin-top: 4px;
+`;
+
+const FishingButton = styled.button`
+  width: 80px;
+  height: 92px;
+  border-radius: 12px;
+  border: 1px solid
+    ${({ $businessType, theme }) =>
+      $businessType === "어업"
+        ? theme.color.primary_normal
+        : theme.color.grayscale_EE};
+  border-width: ${({ $businessType, theme }) =>
+    $businessType === "어업" ? "2px" : "1px"};
+  box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.18);
+  margin-top: 4px;
+`;
+
+const EtcButton = styled.button`
+  width: 80px;
+  height: 92px;
+  border-radius: 12px;
+  border: 1px solid
+    ${({ $businessType, theme }) =>
+      $businessType === "기타"
+        ? theme.color.primary_normal
+        : theme.color.grayscale_EE};
+  border-width: ${({ $businessType, theme }) =>
+    $businessType === "기타" ? "2px" : "1px"};
   box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.18);
   margin-top: 4px;
 `;

@@ -1,11 +1,11 @@
 import React from "react";
 import { styled } from "styled-components";
 
-const Button = ({ text }) => {
+const BigButton = ({ text }) => {
   return <ButtonBox>{text}</ButtonBox>;
 };
 
-export default Button;
+export default BigButton;
 
 const ButtonBox = styled.button`
   height: 48px;

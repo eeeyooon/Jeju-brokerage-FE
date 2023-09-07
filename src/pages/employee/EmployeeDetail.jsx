@@ -2,7 +2,7 @@ import React from "react";
 import { styled } from "styled-components";
 import PreviewEmployContent from "../../components/PreviewEmployContent";
 import EmployContent from "../../components/EmployContent";
-import Button from "../../components/Button";
+import BigButton from "../../components/BigButton";
 
 function EmployeeDetail() {
   return (
@@ -13,7 +13,7 @@ function EmployeeDetail() {
       </header>
       <PreviewEmployContent />
       <EmployContent />
-      <Button text="전화하기" />
+      <BigButton text="전화하기" />
     </EmployDetailWrapper>
   );
 }

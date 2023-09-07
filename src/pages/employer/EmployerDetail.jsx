@@ -2,7 +2,7 @@ import React from "react";
 import { styled } from "styled-components";
 import PreviewEmployContent from "./../../components/PreviewEmployContent";
 import EmployContent from "../../components/EmployContent";
-import Button from "./../../components/Button";
+import Button from "../../components/BigButton";
 
 function EmployerDetail() {
   return (

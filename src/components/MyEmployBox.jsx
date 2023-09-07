@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "./Button";
+import SmallButton from "./SmallButton";
 
 function MyEmployBox() {
   return (
@@ -12,7 +12,7 @@ function MyEmployBox() {
       <div>농업</div>
       <div className="BtnWrapper">
         <p>현재 구인중이에요</p>
-        <Button text="구인마감" />
+        <SmallButton text="구인마감" />
       </div>
     </div>
   );

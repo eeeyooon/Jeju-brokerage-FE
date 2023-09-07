@@ -1,6 +1,6 @@
 import React from "react";
 import { styled } from "styled-components";
-import Button from "../../components/Button";
+import BigButton from "../../components/BigButton";
 
 function EmployWrite() {
   return (
@@ -82,7 +82,7 @@ function EmployWrite() {
           placeholder="15글자 이상 적어주세요."
         />
       </div>
-      <Button text="버튼텍스트" />
+      <BigButton text="버튼텍스트" />
     </EmployWriteWrapper>
   );
 }

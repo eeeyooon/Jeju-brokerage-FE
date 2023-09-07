@@ -4,14 +4,18 @@ import { styled } from "styled-components";
 import PreviewEmployContent from "../../components/PreviewEmployContent";
 import EmployContent from "../../components/EmployContent";
 import BigButton from "../../components/BigButton";
+import { useLocation } from "react-router-dom";
 
-function EmployeeDetail({ memberId }) {
+function EmployeeDetail() {
   const [businesse, setBusinesse] = useState();
+  const location = useLocation();
+  const businessId = location.state;
+  console.log(businessId);
 
   useEffect(() => {
     const response = axios
       .get(
-        `https://user-app.krampoline.com/k77c33daa3a48a/business/${memberId}`
+        `https://user-app.krampoline.com/k77c33daa3a48a/business/${businessId}`
       )
       .then((response) => {
         setBusinesse(response.data);
@@ -21,7 +25,7 @@ function EmployeeDetail({ memberId }) {
       .catch((error) => {
         console.error(error);
       });
-  }, [memberId]);
+  }, [businessId]);
 
   return (
     <EmployDetailWrapper>

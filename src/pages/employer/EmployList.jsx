@@ -1,12 +1,19 @@
 import React from "react";
 import { styled } from "styled-components";
 import MyEmployBox from "./../../components/MyEmployBox";
+import { useNavigate } from "react-router-dom";
 
 function EmployList() {
+  const navigate = useNavigate();
+
   return (
     <EmployListWrapper>
       <header>
-        <button>
+        <button
+          onClick={() => {
+            navigate("/main");
+          }}
+        >
           <img
             alt="뒤로가기 버튼"
             src={process.env.PUBLIC_URL + "/assets/arrow_back.svg"}

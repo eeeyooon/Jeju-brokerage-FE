@@ -272,6 +272,7 @@ function EmployWrite() {
         <CreateAbleBtn
           onClick={() => {
             handleSubmit();
+            localStorage.setItem("userType", "구인자");
             navigate("/employ-list");
           }}
         >

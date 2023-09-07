@@ -1,14 +1,26 @@
 import React, { useState } from "react";
 import PreviewEmployContent from "./PreviewEmployContent";
 import { styled } from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 function PreviewEmployBox({ clickedBusiness }) {
   const [clickedData, setClickedData] = useState(clickedBusiness);
+  const navigate = useNavigate();
+  console.log(clickedBusiness.businessId);
+
   return (
     <div>
       <PreviewEmployContent clickedData={clickedData} />
       <BtnWrapper>
-        <DetailBtn>상세보기</DetailBtn>
+        <DetailBtn
+          onClick={() => {
+            navigate("/employee-detail", {
+              state: { businessId: clickedBusiness.businessId },
+            });
+          }}
+        >
+          상세보기
+        </DetailBtn>
         <CallBtn>전화하기</CallBtn>
       </BtnWrapper>
     </div>

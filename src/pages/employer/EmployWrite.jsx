@@ -51,7 +51,7 @@ function EmployWrite() {
               Authorization: `KakaoAK f7774b37f25f92a00c923157aa73cd38`,
             },
             params: {
-              query: "제주특별자치도 서귀포시 성산읍 일주동로 4282",
+              query: address,
             },
           }
         );

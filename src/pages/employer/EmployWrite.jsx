@@ -7,7 +7,7 @@ function EmployWrite() {
   const [businessName, setBusinessName] = useState("");
   const [businessNumber, setBusinessNumber] = useState("");
   const [address, setAddress] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("01012345678");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [businessType, setBusinessType] = useState("농업");
   const [workStartDate, setWorkStartDate] = useState("");
   const [workFinishDate, setWorkFinishDate] = useState("");
@@ -75,6 +75,17 @@ function EmployWrite() {
             placeholder="2글자 이상 적어주세요."
             onChange={(event) => {
               setBusinessNumber(event.target.value);
+            }}
+          />
+        </div>
+        <div className="PhoneNumberWrapper">
+          <label htmlFor="PhoneNumberInput">연락처</label>
+          <input
+            type="tel"
+            id="PhoneNumberInput"
+            placeholder="010-0000-0000"
+            onChange={(event) => {
+              setPhoneNumber(event.target.value);
             }}
           />
         </div>

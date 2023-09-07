@@ -3,8 +3,10 @@ import { styled } from "styled-components";
 import BigButton from "../../components/BigButton";
 import DaumPost from "../../components/DaumPost";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function EmployWrite() {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [businessName, setBusinessName] = useState("");
   const [businessNumber, setBusinessNumber] = useState("");
@@ -267,7 +269,14 @@ function EmployWrite() {
         </BusinessDetailWrapper>
       </EmployForm>
       <ButtonWrapper>
-        <CreateAbleBtn onClick={handleSubmit}>등록하기</CreateAbleBtn>
+        <CreateAbleBtn
+          onClick={() => {
+            handleSubmit();
+            navigate("/employ-list");
+          }}
+        >
+          등록하기
+        </CreateAbleBtn>
       </ButtonWrapper>
     </EmployWriteWrapper>
   );

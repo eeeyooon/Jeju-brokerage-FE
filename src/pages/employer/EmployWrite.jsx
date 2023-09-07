@@ -47,40 +47,47 @@ function EmployWrite() {
   return (
     <EmployWriteWrapper>
       <header>
-        <button>뒤로가기</button>
-        <h1>
-          일꾼들에게 보여줄
-          <p>정보를 입력해주세요</p>
-        </h1>
+        <button>
+          <img
+            alt="뒤로가기 버튼"
+            src={process.env.PUBLIC_URL + "/assets/arrow_back.svg"}
+          />
+        </button>
       </header>
-      <div>
-        <div className="BusinessNameWrapper">
+      <WriteHeaderText>
+        일꾼들에게 보여줄
+        <p>정보를 입력해주세요</p>
+      </WriteHeaderText>
+      <EmployForm>
+        <BusinessNameWrapper>
           <label htmlFor="BusinessNameInput">사업장 명</label>
-          <input
+          <FormInput
             type="text"
             id="BusinessNameInput"
-            className="BusinessName"
             placeholder="2글자 이상 적어주세요."
             onChange={(event) => {
               setBusinessName(event.target.value);
             }}
           />
-        </div>
-        <div className="BusinessNumberWrapper">
+        </BusinessNameWrapper>
+        <BusinessNumberWrapper>
           <label htmlFor="BusinessNumberInput">사업자등록번호</label>
-          <input
-            type="text"
-            id="BusinessNumberInput"
-            className="BusinenssNumber"
-            placeholder="2글자 이상 적어주세요."
-            onChange={(event) => {
-              setBusinessNumber(event.target.value);
-            }}
-          />
-        </div>
-        <div className="PhoneNumberWrapper">
+          <BtnInputWrapper>
+            <FormInput
+              type="text"
+              id="BusinessNumberInput"
+              className="BusinenssNumber"
+              placeholder="2글자 이상 적어주세요."
+              onChange={(event) => {
+                setBusinessNumber(event.target.value);
+              }}
+            />
+            <BigButton text="검색" />
+          </BtnInputWrapper>
+        </BusinessNumberWrapper>
+        <PhoneNumberWrapper>
           <label htmlFor="PhoneNumberInput">연락처</label>
-          <input
+          <FormInput
             type="tel"
             id="PhoneNumberInput"
             placeholder="010-0000-0000"
@@ -88,61 +95,96 @@ function EmployWrite() {
               setPhoneNumber(event.target.value);
             }}
           />
-        </div>
-        <div className="addressSerach">우편주소검색</div>
+        </PhoneNumberWrapper>
+        <AddressSearchWrapper>
+          <label htmlFor="AddressInput">위치</label>
+          <BtnInputWrapper>
+            <FormInput
+              type="text"
+              id="AddressInput"
+              placeholder="도로명 주소 검색"
+            />
+            <BigButton text="검색" />
+          </BtnInputWrapper>
+        </AddressSearchWrapper>
         <p>{address}</p>
-        <DaumPost handleAddressChange={handleAddressChange} />
-        <p>업종</p>
-        <div className="businessTypeWrapper">
-          <div>농업</div>
-          <div>어업</div>
-          <div>기타</div>
-        </div>
-        <div className="WorkDate">
-          <label htmlFor="WorkStartDateInput">근무 시작 날짜</label>
-          <input
-            type="text"
-            id="WorkStartDateInput"
-            className="WorkStartDate"
-            placeholder="YYYY-MM-DD"
-            onChange={(event) => {
-              setWorkStartDate(event.target.value);
-            }}
-          />
-          <label htmlFor="WorkFinishDateInput">근무 종료 날짜</label>
-          <input
-            type="text"
-            id="WorkFinishDateInput"
-            className="WorkFinishDate"
-            placeholder="YYYY-MM-DD"
-            onChange={(event) => {
-              setWorkFinishDate(event.target.value);
-            }}
-          />
-        </div>
-        <div className="WorkTime">
-          <label htmlFor="WorkStartTimeInput">근무 시작 시간</label>
-          <input
-            type="text"
-            id="WorkStartTimeInput"
-            placeholder="24:00"
-            onChange={(event) => {
-              setWorkStartTime(event.target.value);
-            }}
-          />
-          <label htmlFor="WorkFinishTimeInput">근무 종료 시간</label>
-          <input
-            type="text"
-            id="WorkFinishTimeInput"
-            placeholder="24:00"
-            onChange={(event) => {
-              setWorkFinishTime(event.target.value);
-            }}
-          />
-        </div>
-        <div className="salaryWrapper">
+        {/* <DaumPost handleAddressChange={handleAddressChange} /> */}
+        <BusinessTypeWrapper>
+          <p>업종</p>
+          <TypeBtnWrapper>
+            <button>
+              <img
+                alt="농업"
+                src={process.env.PUBLIC_URL + "/assets/Farm.svg"}
+              />
+            </button>
+            <button>
+              <img
+                alt="어업"
+                src={process.env.PUBLIC_URL + "/assets/Fishing.svg"}
+              />
+            </button>
+            <button>
+              <img
+                alt="기타"
+                src={process.env.PUBLIC_URL + "/assets/Etc.svg"}
+              />
+            </button>
+          </TypeBtnWrapper>
+        </BusinessTypeWrapper>
+        <WorkDateWrapper>
+          <WorkStartDateWrapper>
+            <label htmlFor="WorkStartDateInput">근무 시작 일</label>
+            <WorkInput
+              type="text"
+              id="WorkStartDateInput"
+              className="WorkStartDate"
+              placeholder="YYYY-MM-DD"
+              onChange={(event) => {
+                setWorkStartDate(event.target.value);
+              }}
+            />
+          </WorkStartDateWrapper>
+          <WorkFinishDateWrapper>
+            <label htmlFor="WorkFinishDateInput">근무 종료 일</label>
+            <WorkInput
+              type="text"
+              id="WorkFinishDateInput"
+              className="WorkFinishDate"
+              placeholder="YYYY-MM-DD"
+              onChange={(event) => {
+                setWorkFinishDate(event.target.value);
+              }}
+            />
+          </WorkFinishDateWrapper>
+        </WorkDateWrapper>
+        <WorkTimeWrapper>
+          <WorkStartTimeWrapper>
+            <label htmlFor="WorkStartTimeInput">근무 시작 시간</label>
+            <WorkInput
+              type="text"
+              id="WorkStartTimeInput"
+              placeholder="24:00"
+              onChange={(event) => {
+                setWorkStartTime(event.target.value);
+              }}
+            />
+          </WorkStartTimeWrapper>
+          <WorkFinishTimeWrapper>
+            <label htmlFor="WorkFinishTimeInput">근무 종료 시간</label>
+            <WorkInput
+              type="text"
+              id="WorkFinishTimeInput"
+              placeholder="24:00"
+              onChange={(event) => {
+                setWorkFinishTime(event.target.value);
+              }}
+            />
+          </WorkFinishTimeWrapper>
+        </WorkTimeWrapper>
+        <SalaryWrapper>
           <label htmlFor="salaryInput">임금</label>
-          <div>
+          <SalaryInputWrapper>
             <select name="salaryType" id="salaryType">
               <option value="시급" defaultValue>
                 시급
@@ -151,27 +193,29 @@ function EmployWrite() {
               <option value="월급">월급</option>
               <option value="건당">건당</option>
             </select>
-          </div>
-          <input
+            <FormInput
+              type="text"
+              id="salaryInput"
+              placeholder="000,000원"
+              onChange={(event) => {
+                setSalary(event.target.value);
+              }}
+            />
+          </SalaryInputWrapper>
+        </SalaryWrapper>
+        <BusinessDetailWrapper>
+          <label htmlFor="businessDetailInput">상세 내용</label>
+          <DetailInput
             type="text"
-            id="salaryInput"
-            placeholder="000,000원"
+            name="businessDetailInput"
+            id="businessDetailInput"
+            placeholder="15글자 이상 적어주세요."
             onChange={(event) => {
-              setSalary(event.target.value);
+              setBusinessDetail(event.target.value);
             }}
           />
-        </div>
-        <label htmlFor="businessDetailInput">상세 내용</label>
-        <input
-          type="text"
-          name="businessDetailInput"
-          id="businessDetailInput"
-          placeholder="15글자 이상 적어주세요."
-          onChange={(event) => {
-            setBusinessDetail(event.target.value);
-          }}
-        />
-      </div>
+        </BusinessDetailWrapper>
+      </EmployForm>
       <BigButton text="버튼텍스트" />
     </EmployWriteWrapper>
   );
@@ -184,4 +228,171 @@ const EmployWriteWrapper = styled.div`
   height: 812px;
   background-color: ${({ theme }) => theme.color.white};
   user-select: none;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  header {
+    height: 52px;
+    width: 375px;
+    display: flex;
+    align-items: center;
+    padding-left: 24px;
+    margin-bottom: 20px;
+  }
+
+  label {
+    color: ${({ theme }) => theme.color.grayscale_66};
+    font-size: ${({ theme }) => theme.fontSize.caption};
+    margin-bottom: 4px;
+  }
+`;
+
+const WriteHeaderText = styled.h1`
+  width: 161px;
+  height: 56px;
+  color: ${({ theme }) => theme.color.grayscale_1c};
+  font-size: ${({ theme }) => theme.fontSize.title};
+  font-weight: ${({ theme }) => theme.fontWeight.bold};
+  margin-left: 20px;
+  line-height: 28px;
+  margin-bottom: 16px;
+`;
+
+const EmployForm = styled.div`
+  width: 335px;
+  height: 988px;
+  margin-right: 20px;
+  margin-left: 20px;
+`;
+
+const BusinessNameWrapper = styled.div`
+  width: 335px;
+  height: 94px;
+  display: flex;
+  flex-flow: column nowrap;
+`;
+
+const FormInput = styled.input`
+  height: 48px;
+  padding-left: 16px;
+  border-radius: 5px;
+  border-width: 1px;
+  border-color: ${({ theme }) => theme.color.grayscale_bd};
+  outline: none;
+
+  ::placeholder {
+    width: 216px;
+    height: 20px;
+    color: ${({ theme }) => theme.color.grayscale_bd};
+    font-size: ${({ theme }) => theme.fontSize.caption1};
+    padding-left: 16px;
+  }
+`;
+
+const WorkInput = styled.input`
+  width: 164px;
+  height: 48px;
+  padding-left: 16px;
+  border-radius: 5px;
+  border-width: 1px;
+  border-color: ${({ theme }) => theme.color.grayscale_bd};
+  outline: none;
+  ::placeholder {
+    width: 216px;
+    height: 20px;
+    color: ${({ theme }) => theme.color.grayscale_bd};
+    font-size: ${({ theme }) => theme.fontSize.caption1};
+    padding-left: 16px;
+  }
+`;
+
+const BtnInputWrapper = styled.div``;
+
+const BusinessNumberWrapper = styled.div`
+  width: 335px;
+  height: 94px;
+  display: flex;
+  flex-flow: column nowrap;
+`;
+
+const PhoneNumberWrapper = styled.div`
+  width: 335px;
+  height: 94px;
+  display: flex;
+  flex-flow: column nowrap;
+`;
+
+const AddressSearchWrapper = styled.div`
+  width: 335px;
+  height: 94px;
+  display: flex;
+  flex-flow: column nowrap;
+`;
+
+const BusinessTypeWrapper = styled.div`
+  width: 272px;
+  height: 136px;
+  display: flex;
+  flex-flow: column nowrap;
+`;
+
+const TypeBtnWrapper = styled.div`
+  height: 92px;
+  display: flex;
+`;
+
+const WorkDateWrapper = styled.div`
+  width: 335px;
+  height: 94px;
+  display: flex;
+`;
+
+const WorkStartDateWrapper = styled.div``;
+
+const WorkFinishDateWrapper = styled.div``;
+
+const WorkStartTimeWrapper = styled.div``;
+
+const WorkFinishTimeWrapper = styled.div``;
+
+const WorkTimeWrapper = styled.div`
+  width: 335px;
+  height: 94px;
+  display: flex;
+`;
+
+const SalaryWrapper = styled.div`
+  width: 335px;
+  height: 94px;
+`;
+
+const SalaryInputWrapper = styled.div`
+  display: flex;
+`;
+
+const BusinessDetailWrapper = styled.div`
+  width: 335px;
+  height: 194px;
+  display: flex;
+  flex-flow: column nowrap;
+`;
+
+const DetailInput = styled.textarea`
+  height: 170px;
+  border-radius: 5px;
+  border-width: 1px;
+  border-color: ${({ theme }) => theme.color.grayscale_bd};
+  outline: none;
+  padding-bottom: 30px;
+  ::placeholder {
+    width: 216px;
+    height: 20px;
+    color: ${({ theme }) => theme.color.grayscale_bd};
+    font-size: ${({ theme }) => theme.fontSize.caption1};
+    padding-left: 16px;
+  }
 `;

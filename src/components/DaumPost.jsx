@@ -1,7 +1,6 @@
 import DaumPostCode from "react-daum-postcode";
-import { useState } from "react";
 
-const DaumPost = ({ handleAddressChange }) => {
+const DaumPost = ({ handleAddressChange, setIsOpen }) => {
   // const [fullAddress, setFullAddress] = useState("");
   const handleComplete = (data) => {
     let fullAddress = data.address;
@@ -17,8 +16,8 @@ const DaumPost = ({ handleAddressChange }) => {
       }
       fullAddress += `${extraAddress !== "" ? ` ${extraAddress}` : ""}`;
     }
-    console.log(fullAddress);
     handleAddressChange(fullAddress);
+    setIsOpen(false);
     //fullAddress -> 전체 주소반환
   };
   return <DaumPostCode onComplete={handleComplete} className="post-code" />;

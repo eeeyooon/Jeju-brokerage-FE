@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import BigButton from "../../components/BigButton";
 import DaumPost from "../../components/DaumPost";
 
 function EmployWrite() {
+  const [isOpen, setIsOpen] = useState(false);
   const [businessName, setBusinessName] = useState("");
   const [businessNumber, setBusinessNumber] = useState("");
-  const [address, setAddress] = useState("");
+  const [address, setAddress] = useState("도로명 주소 검색");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [businessType, setBusinessType] = useState("농업");
   const [workStartDate, setWorkStartDate] = useState("");
@@ -38,14 +39,13 @@ function EmployWrite() {
     recruitState,
   };
 
-  // console.log(address);
-  // console.log(data);
   // DaumPost 컴포넌트에서 받은 fullAddress를 처리하는 함수
   const handleAddressChange = (newAddress) => {
     setAddress(newAddress);
   };
   return (
     <EmployWriteWrapper>
+      {isOpen && <ModalBackground onClick={() => setIsOpen(false)} />}
       <header>
         <button>
           <img
@@ -73,7 +73,7 @@ function EmployWrite() {
         <BusinessNumberWrapper>
           <label htmlFor="BusinessNumberInput">사업자등록번호</label>
           <BtnInputWrapper>
-            <FormInput
+            <BtnInput
               type="text"
               id="BusinessNumberInput"
               className="BusinenssNumber"
@@ -97,39 +97,43 @@ function EmployWrite() {
           />
         </PhoneNumberWrapper>
         <AddressSearchWrapper>
-          <label htmlFor="AddressInput">위치</label>
-          <BtnInputWrapper>
-            <FormInput
-              type="text"
-              id="AddressInput"
-              placeholder="도로명 주소 검색"
-            />
-            <BigButton text="검색" />
-          </BtnInputWrapper>
+          <AddressText>위치</AddressText>
+          <SearchBoxWrapper>
+            <SearchBox onClick={() => setIsOpen(true)}>{address}</SearchBox>
+            <SearchBtn onClick={() => setIsOpen(true)}>검색</SearchBtn>
+          </SearchBoxWrapper>
         </AddressSearchWrapper>
-        <p>{address}</p>
-        {/* <DaumPost handleAddressChange={handleAddressChange} /> */}
+        {isOpen && (
+          <>
+            <SearchModalWrapper>
+              <DaumPost
+                handleAddressChange={handleAddressChange}
+                setIsOpen={setIsOpen}
+              />
+            </SearchModalWrapper>
+          </>
+        )}
         <BusinessTypeWrapper>
-          <p>업종</p>
+          <TypeText>업종</TypeText>
           <TypeBtnWrapper>
-            <button>
+            <TypeButton>
               <img
                 alt="농업"
                 src={process.env.PUBLIC_URL + "/assets/Farm.svg"}
               />
-            </button>
-            <button>
+            </TypeButton>
+            <TypeButton>
               <img
                 alt="어업"
                 src={process.env.PUBLIC_URL + "/assets/Fishing.svg"}
               />
-            </button>
-            <button>
+            </TypeButton>
+            <TypeButton>
               <img
                 alt="기타"
                 src={process.env.PUBLIC_URL + "/assets/Etc.svg"}
               />
-            </button>
+            </TypeButton>
           </TypeBtnWrapper>
         </BusinessTypeWrapper>
         <WorkDateWrapper>
@@ -185,14 +189,14 @@ function EmployWrite() {
         <SalaryWrapper>
           <label htmlFor="salaryInput">임금</label>
           <SalaryInputWrapper>
-            <select name="salaryType" id="salaryType">
+            <SalarySelect name="salaryType" id="salaryType">
               <option value="시급" defaultValue>
                 시급
               </option>
               <option value="일급">일급</option>
               <option value="월급">월급</option>
               <option value="건당">건당</option>
-            </select>
+            </SalarySelect>
             <FormInput
               type="text"
               id="salaryInput"
@@ -216,7 +220,9 @@ function EmployWrite() {
           />
         </BusinessDetailWrapper>
       </EmployForm>
-      <BigButton text="버튼텍스트" />
+      <ButtonWrapper>
+        <CreateAbleBtn>등록하기</CreateAbleBtn>
+      </ButtonWrapper>
     </EmployWriteWrapper>
   );
 }
@@ -228,6 +234,9 @@ const EmployWriteWrapper = styled.div`
   height: 812px;
   background-color: ${({ theme }) => theme.color.white};
   user-select: none;
+
+  position: relative;
+
   overflow-x: hidden;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -281,8 +290,9 @@ const FormInput = styled.input`
   padding-left: 16px;
   border-radius: 5px;
   border-width: 1px;
-  border-color: ${({ theme }) => theme.color.grayscale_bd};
-  outline: none;
+  border-style: solid;
+  border-color: ${({ theme }) => theme.color.grayscale_66};
+  outline-color: ${({ theme }) => theme.color.grayscale_66};
 
   ::placeholder {
     width: 216px;
@@ -291,16 +301,58 @@ const FormInput = styled.input`
     font-size: ${({ theme }) => theme.fontSize.caption1};
     padding-left: 16px;
   }
+`;
+
+const SearchBtn = styled.button`
+  height: 48px;
+  padding: 24px 14px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background-color: ${({ theme }) => theme.color.primary_normal};
+  color: ${({ theme }) => theme.color.white};
+  font-size: ${({ theme }) => theme.fontSize.body1};
+`;
+
+const BtnInput = styled.input`
+  width: 264px;
+  height: 48px;
+  border-radius: 5px;
+  padding-left: 16px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: ${({ theme }) => theme.color.grayscale_66};
+  outline-color: ${({ theme }) => theme.color.grayscale_66};
+  margin-right: 8px;
+`;
+
+const SearchBox = styled.div`
+  width: 264px;
+  height: 48px;
+  border-radius: 5px;
+  padding-left: 16px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: ${({ theme }) => theme.color.grayscale_66};
+  outline-color: ${({ theme }) => theme.color.grayscale_66};
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+  color: ${({ theme }) => theme.color.grayscale_66};
 `;
 
 const WorkInput = styled.input`
   width: 164px;
   height: 48px;
-  padding-left: 16px;
   border-radius: 5px;
+  padding-left: 16px;
   border-width: 1px;
-  border-color: ${({ theme }) => theme.color.grayscale_bd};
-  outline: none;
+  border-style: solid;
+  border-color: ${({ theme }) => theme.color.grayscale_66};
+  outline-color: ${({ theme }) => theme.color.grayscale_66};
+  margin-top: 4px;
+
   ::placeholder {
     width: 216px;
     height: 20px;
@@ -310,7 +362,42 @@ const WorkInput = styled.input`
   }
 `;
 
-const BtnInputWrapper = styled.div``;
+const BtnInputWrapper = styled.div`
+  width: 335px;
+  height: 92px;
+`;
+
+const SearchBoxWrapper = styled.div`
+  width: 335px;
+  height: 92px;
+  display: flex;
+`;
+
+const TypeText = styled.p`
+  color: ${({ theme }) => theme.color.grayscale_66};
+  font-size: ${({ theme }) => theme.fontSize.caption};
+  margin-bottom: 4px;
+`;
+
+const AddressText = styled.p`
+  color: ${({ theme }) => theme.color.grayscale_66};
+  font-size: ${({ theme }) => theme.fontSize.caption};
+  margin-bottom: 4px;
+`;
+
+const TypeBtnWrapper = styled.div`
+  height: 92px;
+  display: flex;
+  justify-content: space-evenly;
+`;
+
+const TypeButton = styled.button`
+  width: 80px;
+  height: 92px;
+  border: 5px;
+  box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.18);
+  margin-top: 4px;
+`;
 
 const BusinessNumberWrapper = styled.div`
   width: 335px;
@@ -340,11 +427,6 @@ const BusinessTypeWrapper = styled.div`
   flex-flow: column nowrap;
 `;
 
-const TypeBtnWrapper = styled.div`
-  height: 92px;
-  display: flex;
-`;
-
 const WorkDateWrapper = styled.div`
   width: 335px;
   height: 94px;
@@ -370,8 +452,17 @@ const SalaryWrapper = styled.div`
   height: 94px;
 `;
 
+const SalarySelect = styled.select`
+  width: 106px;
+  height: 48px;
+  margin-right: 8px;
+  border-radius: 5px;
+  text-align: center;
+`;
+
 const SalaryInputWrapper = styled.div`
   display: flex;
+  margin-top: 4px;
 `;
 
 const BusinessDetailWrapper = styled.div`
@@ -385,14 +476,50 @@ const DetailInput = styled.textarea`
   height: 170px;
   border-radius: 5px;
   border-width: 1px;
-  border-color: ${({ theme }) => theme.color.grayscale_bd};
-  outline: none;
+  border-style: solid;
+  border-color: ${({ theme }) => theme.color.grayscale_66};
+  outline-color: ${({ theme }) => theme.color.grayscale_66};
   padding-bottom: 30px;
+
   ::placeholder {
-    width: 216px;
+    width: 131px;
     height: 20px;
     color: ${({ theme }) => theme.color.grayscale_bd};
     font-size: ${({ theme }) => theme.fontSize.caption1};
-    padding-left: 16px;
   }
+`;
+
+const ButtonWrapper = styled.div`
+  width: 375px;
+  height: 88px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const CreateAbleBtn = styled.button`
+  width: 335px;
+  height: 48px;
+  border-radius: 8px;
+  color: ${({ theme }) => theme.color.white};
+  background-color: ${({ theme }) => theme.color.primary_normal};
+  font-size: ${({ theme }) => theme.fontSize.body1};
+`;
+
+const SearchModalWrapper = styled.div`
+  width: 375px;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  z-index: 10;
+  transform: translate(0, -50%);
+`;
+
+const ModalBackground = styled.div`
+  background-color: #a8a8a8;
+  position: fixed;
+  height: inherit;
+  opacity: 0.65;
+  width: 375px;
+  z-index: 5;
 `;

@@ -2,8 +2,20 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import PreviewEmployBox from "../components/PreviewEmployBox";
+import axios from "axios";
 
 function Main() {
+  const [businesses, setBusinesses] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://user-app.krampoline.com/k77c33daa3a48a/business")
+      .then((response) => {
+        setBusinesses(response.data);
+        console.log("Received data:", response.data);
+      });
+  }, []);
+
   const new_script = (src) => {
     return new Promise((resolve, reject) => {
       const script = document.createElement("script");
@@ -43,20 +55,10 @@ function Main() {
               };
               const map = new kakao.maps.Map(mapContainer, options);
 
-              // 마커 설정
+              // 현재위치 마커 설정
               const markerPosition = new kakao.maps.LatLng(latitude, longitude);
-
-              //   var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다
-              //   imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
-              //   imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-
-              //     // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-              //     var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
-              //         markerPosition = new kakao.maps.LatLng(37.54699, 127.09598); // 마커가 표시될 위치입니다
-
               const marker = new kakao.maps.Marker({
                 position: markerPosition,
-                // image: markerImage // 마커이미지 설정
               });
               marker.setMap(map);
             },
@@ -69,16 +71,30 @@ function Main() {
         }
       });
     });
-  }, []);
+  }, [businesses]);
 
   return (
     <MainWrapper>
       <div>
         <p> 단기 장기 </p>
-
         <button>구인하기</button>
         <p />
         <button>내가쓴글</button>
+        <ul>
+          {/* 받아온 정보 확인 */}
+          {businesses.map((business) => (
+            <li key={business.businessId}>
+              <p>사업장명: {business.businessName}</p>
+              <p>전화번호: {business.phoneNumber}</p>
+              <p>사업 종류: {business.businessType}</p>
+              <p>모집 상태: {business.recruitState}</p>
+              <p>위도: {business.latitude}</p>
+              <p>경도: {business.longitude}</p>
+              <p>주소: {business.address}</p>
+              <p>총 근무일수: {business.totalWorkDate}</p>
+            </li>
+          ))}
+        </ul>
 
         {/* 지도자리  시작*/}
         <div className="App">
@@ -90,7 +106,6 @@ function Main() {
         </div>
         {/* 지도자리  끝*/}
 
-        {/* 상세정보 모달창 */}
         <PreviewEmployBox />
       </div>
     </MainWrapper>

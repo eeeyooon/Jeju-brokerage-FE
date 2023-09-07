@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import PreviewEmployContent from "./PreviewEmployContent";
 import { styled } from "styled-components";
 
-function PreviewEmployBox() {
+function PreviewEmployBox({ clickedBusiness }) {
+  const [clickedData, setClickedData] = useState(clickedBusiness);
   return (
     <div>
-      <PreviewEmployContent />
+      <PreviewEmployContent clickedData={clickedData} />
       <BtnWrapper>
         <DetailBtn>상세보기</DetailBtn>
         <CallBtn>전화하기</CallBtn>

@@ -2,9 +2,13 @@ import React, { useState, useEffect } from "react";
 import { styled } from "styled-components";
 import PreviewEmployBox from "../components/PreviewEmployBox";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Main() {
   const [businesses, setBusinesses] = useState([]);
+  const [clickedBusiness, setClickedBusiness] = useState();
+  const [isOpenModal, setIsOpenModal] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -38,78 +42,115 @@ function Main() {
     my_script.then(() => {
       const kakao = window["kakao"];
       kakao.maps.load(() => {
-        // default 지도 위치 세팅
-        if ("geolocation" in navigator) {
-          navigator.geolocation.getCurrentPosition(
-            (position) => {
-              const latitude = position.coords.latitude;
-              const longitude = position.coords.longitude;
+        let container = document.getElementById("map");
 
-              var mapContainer = document.getElementById("map"), // 지도를 표시할 div
-                mapOption = {
-                  center: new kakao.maps.LatLng(latitude, longitude), // 지도의 중심좌표
-                  level: 3, // 지도의 확대 레벨
-                };
+        let options = {
+          // 제주 플레이스로 default 등록
+          center: new kakao.maps.LatLng(33.449616273392, 126.91802537036),
+          level: 5,
+        };
 
-              var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+        const map = new kakao.maps.Map(container, options);
 
-              var positions = [];
+        businesses.forEach((business) => {
+          const marker = new kakao.maps.Marker({
+            map: map,
+            position: new kakao.maps.LatLng(
+              business.longitude,
+              business.latitude
+            ),
+            title: business.businessName,
+            clickable: true,
+          });
 
-              businesses.forEach((business) => {
-                positions.push({
-                  title: business.address,
-                  latlng: new kakao.maps.LatLng(
-                    business.longitude,
-                    business.latitude
-                  ),
-                });
-              });
-
-              // 마커 이미지의 이미지 주소입니다
-              var imageSrc =
-                "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
-
-              for (var i = 0; i < positions.length; i++) {
-                // 마커 이미지의 이미지 크기 입니다
-                var imageSize = new kakao.maps.Size(24, 35);
-
-                // 마커 이미지를 생성합니다
-                var markerImage = new kakao.maps.MarkerImage(
-                  imageSrc,
-                  imageSize
-                );
-
-                // 마커를 생성합니다
-                var marker = new kakao.maps.Marker({
-                  map: map, // 마커를 표시할 지도
-                  position: positions[i].latlng, // 마커를 표시할 위치
-                  title: positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-                  image: markerImage, // 마커 이미지
-                });
-                marker.setMap(map);
-              }
-            },
-            (error) => {
-              console.error("Error getting geolocation:", error);
-            }
-          );
-        } else {
-          console.error("Geolocation is not available.");
-        }
+          // 마커에 클릭이벤트를 등록합니다
+          kakao.maps.event.addListener(marker, "click", function () {
+            setClickedBusiness({
+              businessId: business.businessId,
+              businessName: business.businessName,
+              address: business.address,
+              businessType: business.businessType,
+              totalWorkDate: business.totalWorkDate,
+            });
+          });
+        });
       });
     });
   }, [businesses]);
 
+  useEffect(() => {
+    console.log(clickedBusiness);
+
+    if (clickedBusiness) {
+      setIsOpenModal(true);
+    }
+
+    setClickedBusiness(clickedBusiness);
+
+    // detail component로 이동
+  }, [clickedBusiness]);
   return (
     <MainWrapper>
+      {isOpenModal && (
+        <CloseModalBg
+          onClick={() => {
+            setIsOpenModal(false);
+          }}
+        />
+      )}
       <div>
         <MainPageContentWrapper>
-          <ServiceTitle>일 있수꽝</ServiceTitle>
-          <p> 단기 장기 </p>
-          <button>구인하기</button>
-          <p />
-          <button>내가쓴글</button>
+          <ServiceTitle>
+            <img
+              alt="서비스 로고"
+              src={process.env.PUBLIC_URL + "/assets/mainpage_logo.svg"}
+            />
+          </ServiceTitle>
+          <MarkInfoBackground>
+            <MarkInfoWrapper>
+              <MarkInfo>
+                <img
+                  alt="1주 이하"
+                  src={process.env.PUBLIC_URL + "/assets/oneweek_circle.svg"}
+                />
+                <span>1주 이하</span>
+              </MarkInfo>
+              <MarkInfo>
+                <img
+                  alt="2주 이하"
+                  src={process.env.PUBLIC_URL + "/assets/twoweek_circle.svg"}
+                />
+                <span>1~2주</span>
+              </MarkInfo>
+              <MarkInfo>
+                <img
+                  alt="한달 이내"
+                  src={
+                    process.env.PUBLIC_URL + "/assets/under_month_circle.svg"
+                  }
+                />
+                <span>2주~한달</span>
+              </MarkInfo>
+              <MarkInfo>
+                <img
+                  alt="한달 이상"
+                  src={process.env.PUBLIC_URL + "/assets/over_month_circle.svg"}
+                />
+                <span>한달 이상</span>
+              </MarkInfo>
+            </MarkInfoWrapper>
+          </MarkInfoBackground>
         </MainPageContentWrapper>
+        <BtnWrapper>
+          <MainPageBtn
+            onClick={() => {
+              navigate("/employ-write");
+            }}
+          >
+            구인하기
+          </MainPageBtn>
+          <MainPageBtn>내가쓴글</MainPageBtn>
+        </BtnWrapper>
         {/* 지도자리  시작*/}
         <div className="App">
           <div
@@ -119,9 +160,11 @@ function Main() {
           ></div>
         </div>
         {/* 지도자리  끝*/}
-        <PreviewModal>
-          <PreviewEmployBox />
-        </PreviewModal>
+        {isOpenModal && (
+          <PreviewModal>
+            <PreviewEmployBox clickedBusiness={clickedBusiness} />
+          </PreviewModal>
+        )}
       </div>
     </MainWrapper>
   );
@@ -142,11 +185,75 @@ const MainPageContentWrapper = styled.div`
   z-index: 10;
 `;
 
-const ServiceTitle = styled.h1``;
+const ServiceTitle = styled.div`
+  width: 375px;
+  height: 52px;
+  background-color: ${({ theme }) => theme.color.white};
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+`;
 
 const PreviewModal = styled.div`
   padding-top: 20px;
   width: 375px;
   height: 229px;
   background-color: ${({ theme }) => theme.color.white};
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  transform: translate(0, 0);
+`;
+
+const CloseModalBg = styled.div`
+  height: 563px;
+  width: 375px;
+  opacity: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  transform: translate(0, 0);
+`;
+
+const MarkInfoBackground = styled.div`
+  width: 375px;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+`;
+const MarkInfoWrapper = styled.div`
+  width: 290px;
+  height: 33px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.7);
+  font-size: ${({ theme }) => theme.fontSize.caption2};
+`;
+const MarkInfo = styled.div``;
+
+const BtnWrapper = styled.div`
+  position: absolute;
+  top: 13%;
+  right: 5%;
+  z-index: 10;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  height: 80px;
+`;
+
+const MainPageBtn = styled.button`
+  height: 36px;
+  padding: 8px 19px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background-color: ${({ theme }) => theme.color.primary_normal};
+  color: ${({ theme }) => theme.color.white};
+  font-size: ${({ theme }) => theme.fontSize.caption1};
 `;

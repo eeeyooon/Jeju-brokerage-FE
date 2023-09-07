@@ -1,44 +1,47 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 
-//business id를 받아와서 porps 처리하기
-function PreviewEmployContent({ businessId }) {
-  const [business, setBusiness] = useState();
+function PreviewEmployContent({ clickedData }) {
+  const [totalText, setTotalText] = useState("");
 
-  // useEffect(() => {
-  //   const response = axios
-  //     .get(
-  //       `https://user-app.krampoline.com/k77c33daa3a48a/business/${businessId}`
-  //     )
-  //     .then((response) => {
-  //       setBusinesse(response.data);
+  useEffect(() => {
+    setTotalText(handleTotalWork(clickedData.totalWorkDate));
+  }, []);
 
-  //       console.log(business);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // }, [businessId]);
+  const handleTotalWork = (day) => {
+    if (day <= 7) {
+      return "1주 이내";
+    } else if (day > 7 && day <= 14) {
+      return "2주 이내";
+    } else if (day > 14 && day <= 31) {
+      return "한 달 이내";
+    } else {
+      return "한 달 이상";
+    }
+  };
 
   return (
     <PreviewEmployContentWrapper>
       <InfoWrapper>
         <ContentInfo>
-          <h1>귤나와라 뚝딱</h1>
-          <InfoText className="name">김복자</InfoText>
-          <InfoText className="address">
-            제주 서귀포시 성산읍 동류앙로 38(성산읍 고성리) 38-1번길 301호
-          </InfoText>
+          <h1>{clickedData.businessName}</h1>
+          <InfoText className="address">{clickedData.address}</InfoText>
         </ContentInfo>
         <BuinsessTypeBox>
           <img
             alt="업종 아이콘"
-            src={process.env.PUBLIC_URL + "/assets/Farm.svg"}
+            src={
+              process.env.PUBLIC_URL +
+              (clickedData.businessType === "농업"
+                ? "/assets/Farm.svg"
+                : clickedData.businessType === "어업"
+                ? "/assets/Fishing.svg"
+                : "/assets/Etc.svg")
+            }
           />
         </BuinsessTypeBox>
       </InfoWrapper>
-      <PeriodText>한달 이상</PeriodText>
+      <PeriodText $totalText={totalText}>{totalText}</PeriodText>
     </PreviewEmployContentWrapper>
   );
 }
@@ -61,12 +64,13 @@ const InfoWrapper = styled.div`
 
 const ContentInfo = styled.div`
   width: 278px;
-  height: 92px;
+  height: 82px;
 
   h1 {
     height: 28px;
     font-size: ${({ theme }) => theme.fontSize.title};
     font-weight: ${({ theme }) => theme.fontWeight.bold};
+    margin-bottom: 5px;
   }
 `;
 
@@ -95,7 +99,14 @@ const InfoText = styled.p`
 const PeriodText = styled.div`
   width: 58px;
   height: 25px;
-  color: ${({ theme }) => theme.color.over_month};
+  color: ${({ theme, $totalText }) =>
+    $totalText === "1주 이내"
+      ? theme.color.one_week
+      : $totalText === "2주 이내"
+      ? theme.color.two_week
+      : $totalText === "한 달 이내"
+      ? theme.color.under_month
+      : theme.color.over_month};
   font-size: ${({ theme }) => theme.fontSize.caption2};
   background-color: ${({ theme }) => theme.color.grayscale_EE};
   display: flex;

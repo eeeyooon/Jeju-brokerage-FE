@@ -4,7 +4,8 @@ import { theme } from "./style/theme";
 import { GlobalStyles } from "./style/global";
 import Login from "./pages/Login";
 import Main from "./pages/Main";
-import EmployDetail from "./pages/employee/EmployDetail";
+import EmployeeDetail from "./pages/employee/EmployeeDetail";
+import EmployerDetail from "./pages/employer/EmployerDetail";
 import EmployWrite from "./pages/employer/EmployWrite";
 import EmployList from "./pages/employer/EmployList";
 
@@ -17,7 +18,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/main" element={<Main />} />
           <Route path="/" element={<Navigate replace to="/main" />} />
-          <Route path="/employ-detail" element={<EmployDetail />} />
+          <Route path="/employee-detail" element={<EmployeeDetail />} />
+          <Route path="/employer-detail" element={<EmployerDetail />} />
           <Route path="/employ-write" element={<EmployWrite />} />
           <Route path="/employ-list" element={<EmployList />} />
         </Routes>

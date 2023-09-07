@@ -2,7 +2,6 @@ import React from "react";
 import { styled } from "styled-components";
 import PreviewEmployContent from "./../../components/PreviewEmployContent";
 import EmployContent from "../../components/EmployContent";
-import Button from "../../components/BigButton";
 
 function EmployerDetail() {
   return (
@@ -15,6 +14,7 @@ function EmployerDetail() {
           />
         </button>
       </header>
+      <RecruitStatusText>현재 마감된 구인글입니다.</RecruitStatusText>
       <PreviewEmployContent />
       <MarginBox>1</MarginBox>
       <EmployContent />
@@ -44,6 +44,17 @@ const EmployDetailWrapper = styled.div`
   }
 `;
 
+const RecruitStatusText = styled.p`
+  width: 375px;
+  margin-bottom: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: ${({ theme }) => theme.fontSize.title};
+  font-weight: ${({ theme }) => theme.fontWeight.bold};
+  color: ${({ theme }) => theme.color.grayscale_1C};
+`;
+
 const MarginBox = styled.div`
   height: 60px;
   color: ${({ theme }) => theme.color.white};
@@ -56,6 +67,7 @@ const BtnWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   margin-left: 20px;
+  margin-bottom: 20px;
 `;
 
 const EditBtn = styled.button`
@@ -70,6 +82,7 @@ const EditBtn = styled.button`
   background-color: ${({ theme }) => theme.color.white};
   color: ${({ theme }) => theme.color.primary_normal};
   font-size: ${({ theme }) => theme.fontSize.caption1};
+  justify-content: center;
 `;
 
 const DeleteBtn = styled.button`

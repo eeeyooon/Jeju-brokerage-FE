@@ -49,7 +49,7 @@ function EmployContent() {
         <h2>상세 내용</h2>
         <DetailContent>
           서귀포에 작은 감귤 농장입니다. 성별무관하고 힘쎈 사람 구합니다. 중식,
-          석식 제공하고 숙박은 제공하지 않습니다.
+          석식 제공하고 숙박은 제공하지 않습니다. 서귀포에 작은 감귤 농장입니다.
         </DetailContent>
       </DetailContentWrapper>
     </EmployContentWrapper>
@@ -60,8 +60,10 @@ export default EmployContent;
 
 const EmployContentWrapper = styled.div`
   width: 335px;
-  height: 453px;
-  margin: 20px;
+  height: 415px;
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
 
   h2 {
     font-size: ${({ theme }) => theme.fontSize.body2};
@@ -117,7 +119,13 @@ const WorkTimeWrapper = styled.div`
 
 const DetailContentWrapper = styled.div`
   width: 335px;
-  height: 180px;
+  height: 150px;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const SalaryWrapper = styled.div`

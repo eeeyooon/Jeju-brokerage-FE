@@ -1,30 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
-import PreviewEmployBox from "../components/PreviewEmployBox";
 
 function Main() {
   const navigate = useNavigate();
-  return (
-    <MainWrapper>
-      <h1>메인 페이지</h1>
-      <NavBtnWrapper>
-        <NavigateBtn onClick={() => navigate("/login")}>
-          로그인 하기
-        </NavigateBtn>
-        <NavigateBtn onClick={() => navigate("/employ-write")}>
-          구인 공고 글 작성
-        </NavigateBtn>
-        <NavigateBtn onClick={() => navigate("/employ-list")}>
-          작성한 구인공고 목록 조회
-        </NavigateBtn>
-        <NavigateBtn onClick={() => navigate("/employ-detail")}>
-          구인 공고 자세히보기
-        </NavigateBtn>
-      </NavBtnWrapper>
-      <PreviewEmployBox />
-    </MainWrapper>
-  );
+  return <MainWrapper>단기 장기 지도 모달창</MainWrapper>;
 }
 
 export default Main;

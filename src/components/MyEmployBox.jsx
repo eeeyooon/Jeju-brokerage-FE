@@ -14,7 +14,6 @@ function MyEmployBox() {
       )
       .then((response) => {
         setBusinessData(response.data);
-        console.log(response.data);
       })
       .catch((error) => {
         console.error(error);

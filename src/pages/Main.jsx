@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import PreviewEmployBox from "../components/PreviewEmployBox";
 import axios from "axios";
@@ -104,11 +103,13 @@ function Main() {
   return (
     <MainWrapper>
       <div>
-        <p> 단기 장기 </p>
-        <button>구인하기</button>
-        <p />
-        <button>내가쓴글</button>
-
+        <MainPageContentWrapper>
+          <ServiceTitle>일 있수꽝</ServiceTitle>
+          <p> 단기 장기 </p>
+          <button>구인하기</button>
+          <p />
+          <button>내가쓴글</button>
+        </MainPageContentWrapper>
         {/* 지도자리  시작*/}
         <div className="App">
           <div
@@ -118,8 +119,9 @@ function Main() {
           ></div>
         </div>
         {/* 지도자리  끝*/}
-
-        <PreviewEmployBox />
+        <PreviewModal>
+          <PreviewEmployBox />
+        </PreviewModal>
       </div>
     </MainWrapper>
   );
@@ -132,4 +134,19 @@ const MainWrapper = styled.div`
   height: 812px;
   background-color: ${({ theme }) => theme.color.white};
   user-select: none;
+  position: relative;
+`;
+
+const MainPageContentWrapper = styled.div`
+  position: absolute;
+  z-index: 10;
+`;
+
+const ServiceTitle = styled.h1``;
+
+const PreviewModal = styled.div`
+  padding-top: 20px;
+  width: 375px;
+  height: 229px;
+  background-color: ${({ theme }) => theme.color.white};
 `;

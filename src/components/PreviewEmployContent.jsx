@@ -50,6 +50,7 @@ const PreviewEmployContentWrapper = styled.div`
   height: 121px;
   margin-left: 20px;
   margin-right: 20px;
+  background-color: ${({ theme }) => theme.color.white};
 `;
 
 const InfoWrapper = styled.div`

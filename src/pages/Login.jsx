@@ -19,7 +19,7 @@ const handleUserUpdate = async (useremail, username) => {
       }
     );
     console.log(response.data);
-    localStorage.setItem("memberId", response.data.userId);
+    localStorage.setItem("memberId", response.data.memberId);
     localStorage.setItem("userType", response.data.userType);
   } catch (error) {
     console.error(error);

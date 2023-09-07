@@ -1,14 +1,13 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 
 function Login() {
-  const naviagte = useNavigate();
-
   return (
     <LoginWrapper>
-      <h1>로그인 페이지</h1>
-      <NavigateBtn onClick={() => naviagte("/main")}>메인으로 이동</NavigateBtn>
+      <h1>일자리 있수꽝?</h1>
+      <p>설명글설명글설명글설명글</p>
+      <button>카카오톡 로그인</button>
+      <p>팀명</p>
     </LoginWrapper>
   );
 }
@@ -20,12 +19,4 @@ const LoginWrapper = styled.div`
   height: 812px;
   background-color: ${({ theme }) => theme.color.white};
   user-select: none;
-`;
-
-const NavigateBtn = styled.button`
-  padding: 10px;
-  margin: 10px;
-  font-size: ${({ theme }) => theme.fontSize.body2};
-  color: ${({ theme }) => theme.color.white};
-  background-color: ${({ theme }) => theme.color.primary_light};
 `;

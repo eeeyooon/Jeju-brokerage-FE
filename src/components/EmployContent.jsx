@@ -16,7 +16,6 @@ function EmployContent({ clickedBusiness }) {
       });
   }, [clickedData]);
 
-  console.log(business);
   return (
     <EmployContentWrapper>
       {business != null && (

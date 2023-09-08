@@ -1,20 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 
-function PreviewEmployContent({ clickedData, isPreview }) {
+function PreviewEmployContent({ clickedData }) {
   const [totalText, setTotalText] = useState("");
   const [clickData, setClickData] = useState(clickedData);
-  const [isPreviewModal, setIsPreviewModal] = useState(isPreview);
   useEffect(() => {
     setTotalText(handleTotalWork(clickedData.totalWorkDate));
-    // if (isPreviewModal) {
-    //   setClickData(clickData.clickedBusiness);
-    // } else {
-    //   setClickData(clickData);
-    // }
   }, []);
-
-  console.log(clickData);
 
   const handleTotalWork = (day) => {
     if (day <= 7) {

@@ -4,14 +4,23 @@ import { styled } from "styled-components";
 import PreviewEmployContent from "../../components/PreviewEmployContent";
 import EmployContent from "../../components/EmployContent";
 import { useLocation, useNavigate } from "react-router-dom";
+import CallModal from "../../components/CallModal";
 
 function EmployeeDetail() {
   const location = useLocation();
   const { clickedBusiness } = location.state;
   const navigate = useNavigate();
+  const [openCallModal, setOpenCallModal] = useState(false);
+
+  const handleModal = (modalState) => {
+    setOpenCallModal(modalState);
+  };
 
   return (
     <EmployDetailWrapper>
+      {openCallModal && (
+        <ModalBackground onClick={() => setOpenCallModal(false)} />
+      )}
       <header>
         <button
           onClick={() => {
@@ -27,8 +36,19 @@ function EmployeeDetail() {
       <PreviewEmployContent clickedData={clickedBusiness} />
       <EmployContent clickedBusiness={clickedBusiness} />
       <CallBtnWrapper>
-        <CallBtn>전화하기</CallBtn>
+        <CallBtn
+          onClick={() => {
+            setOpenCallModal(true);
+          }}
+        >
+          전화하기
+        </CallBtn>
       </CallBtnWrapper>
+      {openCallModal && (
+        <CallModalWrapper>
+          <CallModal handleModal={handleModal} />
+        </CallModalWrapper>
+      )}
     </EmployDetailWrapper>
   );
 }
@@ -40,6 +60,7 @@ const EmployDetailWrapper = styled.div`
   height: 812px;
   background-color: ${({ theme }) => theme.color.white};
   user-select: none;
+  position: relative;
 
   header {
     height: 52px;
@@ -55,7 +76,7 @@ const CallBtnWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 30px;
+  margin-top: 50px;
 `;
 
 const CallBtn = styled.button`
@@ -65,4 +86,27 @@ const CallBtn = styled.button`
   background-color: ${({ theme }) => theme.color.primary_normal};
   color: ${({ theme }) => theme.color.white};
   font-size: ${({ theme }) => theme.fontSize.body1};
+`;
+
+const ModalBackground = styled.div`
+  background-color: #a8a8a8;
+  position: fixed;
+  height: inherit;
+  opacity: 0.65;
+  width: 375px;
+  z-index: 100;
+`;
+
+const CallModalWrapper = styled.div`
+  padding-top: 20px;
+  width: 375px;
+  height: 229px;
+  position: absolute;
+  transform: translate(0, 0);
+  bottom: 0%;
+  left: 0%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
 `;

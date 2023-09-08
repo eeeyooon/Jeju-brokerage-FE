@@ -268,17 +268,6 @@ const ClosePreviewModal = styled.div`
   transform: translate(0, 0);
 `;
 
-// const CloseCallModal = styled.div`
-//   height: 563px;
-//   width: 375px;
-//   opacity: 100%;
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   z-index: 50;
-//   transform: translate(0, 0);
-// `;
-
 const MarkInfoBackground = styled.div`
   width: 375px;
   display: flex;

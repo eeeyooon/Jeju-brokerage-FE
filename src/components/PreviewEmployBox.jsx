@@ -3,14 +3,13 @@ import PreviewEmployContent from "./PreviewEmployContent";
 import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-function PreviewEmployBox({ clickedBusiness }) {
+function PreviewEmployBox({ clickedBusiness, handleModal }) {
   const [clickedData, setClickedData] = useState(clickedBusiness);
   const navigate = useNavigate();
-  const isPreview = true;
 
   return (
     <div>
-      <PreviewEmployContent isPreview={isPreview} clickedData={clickedData} />
+      <PreviewEmployContent clickedData={clickedData} />
       <BtnWrapper>
         <DetailBtn
           onClick={() => {
@@ -21,7 +20,13 @@ function PreviewEmployBox({ clickedBusiness }) {
         >
           상세보기
         </DetailBtn>
-        <CallBtn>전화하기</CallBtn>
+        <CallBtn
+          onClick={() => {
+            handleModal(true);
+          }}
+        >
+          전화하기
+        </CallBtn>
       </BtnWrapper>
     </div>
   );

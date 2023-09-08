@@ -35,43 +35,45 @@ function MyEmployBox() {
 
   return (
     <div>
-      {businessData.map((business) => (
-        <MyEmployBoxWrapper
-          $recruitState={business.recruitState}
-          key={business.businessId}
-        >
-          <BoxContent>
-            <ContentInfo>
-              <BaseInfo>
-                <h1>{business.businessName}</h1>
-                <InfoText className="name">{business.businessName}</InfoText>
-                <InfoText className="address">{business.address}</InfoText>
-              </BaseInfo>
-              <BusinessTypeBox>
-                <img
-                  alt="업종 아이콘"
-                  src={process.env.PUBLIC_URL + "/assets/Farm.svg"}
-                />
-              </BusinessTypeBox>
-            </ContentInfo>
-            <BtnWrapper>
-              <StatusText $recruitState={business.recruitState}>
-                {business.recruitState === "마감"
-                  ? "현재 마감되었어요"
-                  : "현재 구인중이에요"}
-              </StatusText>
-              <StatusBtn
-                $recruitState={business.recruitState}
-                onClick={() => {
-                  updateRecruitState(business.businessId);
-                }}
-              >
-                {business.recruitState === "마감" ? "다시구인" : "구인마감"}
-              </StatusBtn>
-            </BtnWrapper>
-          </BoxContent>
-        </MyEmployBoxWrapper>
-      ))}
+      {businessData
+        .sort((a, b) => b.businessId - a.businessId)
+        .map((business) => (
+          <MyEmployBoxWrapper
+            $recruitState={business.recruitState}
+            key={business.businessId}
+          >
+            <BoxContent>
+              <ContentInfo>
+                <BaseInfo>
+                  <h1>{business.businessName}</h1>
+                  <InfoText className="name">{business.businessName}</InfoText>
+                  <InfoText className="address">{business.address}</InfoText>
+                </BaseInfo>
+                <BusinessTypeBox>
+                  <img
+                    alt="업종 아이콘"
+                    src={process.env.PUBLIC_URL + "/assets/Farm.svg"}
+                  />
+                </BusinessTypeBox>
+              </ContentInfo>
+              <BtnWrapper>
+                <StatusText $recruitState={business.recruitState}>
+                  {business.recruitState === "마감"
+                    ? "현재 마감되었어요"
+                    : "현재 구인중이에요"}
+                </StatusText>
+                <StatusBtn
+                  $recruitState={business.recruitState}
+                  onClick={() => {
+                    updateRecruitState(business.businessId);
+                  }}
+                >
+                  {business.recruitState === "마감" ? "다시구인" : "구인마감"}
+                </StatusBtn>
+              </BtnWrapper>
+            </BoxContent>
+          </MyEmployBoxWrapper>
+        ))}
     </div>
   );
 }

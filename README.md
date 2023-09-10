@@ -2,8 +2,6 @@
 
 ![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fgoormthon&count_bg=%23F07A37&title_bg=%23787878&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)
 
-**구름톤 7기 최우수상 수상작** 🥰
-
 # 🍊 일있수꽝? Jeju-brokerage Service
 
 ![서비스소개](https://github.com/goormthon/.github/assets/102462534/6d17658d-f405-49ca-a136-c4162b9aa447)

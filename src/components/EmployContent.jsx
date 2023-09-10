@@ -53,7 +53,7 @@ function EmployContent({ clickedBusiness }) {
                 <h3>근무 시간</h3>
               </SubTitleWrapper>
               <p>
-                {business.workStartTime} ~ {business.workFinishDate}
+                {business.workStartTime} ~ {business.workFinishTime}
               </p>
             </WorkTimeWrapper>
           </EmployConditionWrapper>

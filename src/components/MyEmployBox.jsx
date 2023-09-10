@@ -46,13 +46,21 @@ function MyEmployBox() {
               <ContentInfo>
                 <BaseInfo>
                   <h1>{business.businessName}</h1>
-                  <InfoText className="name">{business.businessName}</InfoText>
                   <InfoText className="address">{business.address}</InfoText>
                 </BaseInfo>
                 <BusinessTypeBox>
                   <img
                     alt="업종 아이콘"
-                    src={process.env.PUBLIC_URL + "/assets/Farm.svg"}
+                    src={
+                      process.env.PUBLIC_URL +
+                      `/assets/${
+                        business.businessType === "농업"
+                          ? "Farm"
+                          : business.businessType === "어업"
+                          ? "Fishing"
+                          : "Etc"
+                      }.svg`
+                    }
                   />
                 </BusinessTypeBox>
               </ContentInfo>

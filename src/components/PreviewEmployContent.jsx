@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 
 function PreviewEmployContent({ clickedData }) {
   const [totalText, setTotalText] = useState("");
-
+  const [clickData, setClickData] = useState(clickedData);
   useEffect(() => {
     setTotalText(handleTotalWork(clickedData.totalWorkDate));
   }, []);
@@ -24,17 +24,17 @@ function PreviewEmployContent({ clickedData }) {
     <PreviewEmployContentWrapper>
       <InfoWrapper>
         <ContentInfo>
-          <h1>{clickedData.businessName}</h1>
-          <InfoText className="address">{clickedData.address}</InfoText>
+          <h1>{clickData.businessName}</h1>
+          <InfoText className="address">{clickData.address}</InfoText>
         </ContentInfo>
         <BuinsessTypeBox>
           <img
             alt="업종 아이콘"
             src={
               process.env.PUBLIC_URL +
-              (clickedData.businessType === "농업"
+              (clickData.businessType === "농업"
                 ? "/assets/Farm.svg"
-                : clickedData.businessType === "어업"
+                : clickData.businessType === "어업"
                 ? "/assets/Fishing.svg"
                 : "/assets/Etc.svg")
             }

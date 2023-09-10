@@ -9,7 +9,7 @@ function EmployContent({ clickedBusiness }) {
   useEffect(() => {
     axios
       .get(
-        `https://user-app.krampoline.com/k77c33daa3a48a/business/${clickedData.clickedBusiness.businessId}`
+        `https://user-app.krampoline.com/k77c33daa3a48a/business/${clickedData.businessId}`
       )
       .then((response) => {
         setBusiness(response.data);
@@ -53,14 +53,15 @@ function EmployContent({ clickedBusiness }) {
                 <h3>근무 시간</h3>
               </SubTitleWrapper>
               <p>
-                {business.workStartTime} ~ {business.workFinishDate}
+                {business.workStartTime} ~ {business.workFinishTime}
               </p>
             </WorkTimeWrapper>
           </EmployConditionWrapper>
           <SalaryWrapper>
             <h2>급여 조건</h2>
             <SalaryText>
-              {business.salaryType} <span>{business.salary}원</span>
+              시급
+              <span> {business.salary}원</span>
             </SalaryText>
           </SalaryWrapper>
           <DetailContentWrapper>
@@ -156,10 +157,12 @@ const SalaryText = styled.p`
   height: 25px;
   font-size: ${({ theme }) => theme.fontSize.body2};
   color: ${({ theme }) => theme.color.grayscale_1C};
-
+  display: flex;
+  align-items: center;
   > span {
     color: #f54545;
     font-size: ${({ theme }) => theme.fontSize.body1};
+    margin-left: 10px;
   }
 `;
 

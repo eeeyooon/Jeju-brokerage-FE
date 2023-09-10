@@ -73,7 +73,6 @@ function Main() {
         };
 
         const map = new kakao.maps.Map(container, options);
-
         businesses.forEach((business) => {
           const imageSrc = handleTotalWork(business.totalWorkDate);
           const imageSize = new kakao.maps.Size(50, 60); // 마커이미지의 크기입니다
@@ -268,17 +267,6 @@ const ClosePreviewModal = styled.div`
   z-index: 10;
   transform: translate(0, 0);
 `;
-
-// const CloseCallModal = styled.div`
-//   height: 563px;
-//   width: 375px;
-//   opacity: 100%;
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   z-index: 50;
-//   transform: translate(0, 0);
-// `;
 
 const MarkInfoBackground = styled.div`
   width: 375px;

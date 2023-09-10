@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 function EmployList() {
   const navigate = useNavigate();
+  const userName = localStorage.getItem("username");
 
   return (
     <EmployListWrapper>
@@ -21,7 +22,7 @@ function EmployList() {
         </button>
       </header>
       <ListHeaderText>
-        김복자님의<p>구인 목록이에요</p>
+        {userName}님의<p>구인 목록이에요</p>
       </ListHeaderText>
       <div className="EmployBoxWrapper">
         <MyEmployBox />

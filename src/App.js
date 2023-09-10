@@ -17,7 +17,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/main" element={<Main />} />
-          <Route path="/" element={<Navigate replace to="/main" />} />
+          <Route path="/" element={<Navigate replace to="/login" />} />
           <Route path="/employee-detail" element={<EmployeeDetail />} />
           <Route path="/employer-detail" element={<EmployerDetail />} />
           <Route path="/employ-write" element={<EmployWrite />} />

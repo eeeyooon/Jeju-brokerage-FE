@@ -1,70 +1,100 @@
-# Getting Started with Create React App
+![header](https://capsule-render.vercel.app/api?type=waving&color=0:FFC26F,100:FFC000)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fgoormthon&count_bg=%23F07A37&title_bg=%23787878&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)
 
-## Available Scripts
+**구름톤 7기 최우수상 수상작** 🥰
 
-In the project directory, you can run:
+# 🍊 일있수꽝? Jeju-brokerage Service
 
-### `npm start`
+![서비스소개](https://github.com/goormthon/.github/assets/102462534/6d17658d-f405-49ca-a136-c4162b9aa447)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<br/>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+제주 농어업자와 외국인 노동자를 연결하는 새로운 중개 서비스 **일있수꽝?** 입니다.
 
-### `npm test`
+이 서비스는 구름톤 7기 ⛅ 참여팀 "그림자 일꾼"이 제작하였고 최우수상✨을 수상하였습니다.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<br/>
+<br/>
 
-### `npm run build`
+## 시연영상
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+[▶ 시연 영상 보러가기](https://youtu.be/-KSCJo63A3k)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+[![시연영상](https://github.com/goormthon/.github/assets/102462534/a4fc1e8d-26ff-4842-b8a2-90cc9e545a6b)](https://youtu.be/-KSCJo63A3k)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<br/>
+<br/>
 
-### `npm run eject`
+## 프로젝트 구성원 🌊
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+| [정민창 [BE]](https://github.com/MinChangJeong)                                                     | [강지윤 [FE]](https://github.com/eeeyooon)                                                          | [이재영 [FE]](https://github.com/sooonzero)                                                         | 박나혜 [디자이너]                                                                                   | 엄보름 [기획자]                                                                                     |
+| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| ![민창](https://github.com/goormthon/.github/assets/102462534/ac8f4899-e3a9-4fb0-9675-50edbd8c3084) | ![지윤](https://github.com/goormthon/.github/assets/102462534/d3893e34-09b1-4017-8a44-632a563a879b) | ![재영](https://github.com/goormthon/.github/assets/102462534/6a96472f-3cd7-4f34-b992-4f85ceca3fb0) | ![나혜](https://github.com/goormthon/.github/assets/102462534/acdbee70-933e-4371-9b87-21aee7f402d1) | ![보름](https://github.com/goormthon/.github/assets/102462534/9f0d9ec8-34e9-40ac-9e95-fc74fa6240ee) |
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<br/>
+<br/>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 프로젝트 개요
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+**💡 프로젝트 주제** : 제주 농어업자와 외국인 노동자를 연결하는 중개 서비스
 
-## Learn More
+**🍊 서비스 브랜딩** : "일 있나요?라는 제주도 방언으로 구직자에겐 "할 수 있는 일이 있나요?"라는 의미와 구인자에겐 "일을 할 수 있나요?라는 중의적 의미
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+**🏃🏻‍♂️ 프로젝트 구현 기간** : 2023.09.13 ~ 2023.09.15
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+**🖼 디자인 시안** : [일있수꽝 Figma](https://www.figma.com/file/ubkIQ8YzuhOvQ14IuXPDIv/%EA%B7%B8%EB%A6%BC%EC%9E%90%EC%9D%BC%EA%BE%BC_%EB%94%94%EC%9E%90%EC%9D%B8?type=design&mode=design&t=e8ZkXkyoWuosKoTu-0)
 
-### Code Splitting
+**🚀 발표 자료** : [일있수꽝 발표 자료](https://github.com/goormthon/.github/files/12567964/_.pdf)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+**📝 노션** : [프로젝트 관리 노션](https://eeeyooon.notion.site/7436eeea62724ae1bbc26bce91980b50?pvs=4)
 
-### Analyzing the Bundle Size
+<br/>
+<br/>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 기술 스택
 
-### Making a Progressive Web App
+<img src="https://img.shields.io/badge/NPM v.9.1.2-CB3837?style=flat&logo=npm&logoColor=white"/> <img src="https://img.shields.io/badge/Node v.18.12.1-339933?style=flat&logo=Node.js&logoColor=white"/> <img src="https://img.shields.io/badge/Git v.2.35.1-F05032?style=flat&logo=Git&logoColor=white"/>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### FE
 
-### Advanced Configuration
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=JavaScript&logoColor=white"/> <img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=white"/> <img src="https://img.shields.io/badge/React Router-CA4245?style=flat&logo=ReactRouter&logoColor=white"/> <img src="https://img.shields.io/badge/styledcomponents-DB7093?style=flat&logo=styled-components&logoColor=white"/>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### BE
 
-### Deployment
+<img src="https://img.shields.io/badge/Docker-2496ED?style=flat&logo=Docker&logoColor=white"/> <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=MySQL&logoColor=white"/> <img src="https://img.shields.io/badge/KakaoKrampoline-FFCD00?style=flat&logo=KaKao&logoColor=white"/>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+<br/>
 
-### `npm run build` fails to minify
+## API
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- 카카오 맵 API
+- 카카오 로그인 API
+- 카카오 우편번호 검색 API
+
+<br/>
+
+## 서비스 기능
+
+1. 제주 내 농어업 사업주와 외국인 근로자 연결 기능
+2. 지도 내 사업 근로장 위치 표시 및 기간별로 색상 구별
+3. 구인글 작성 및 마감 관리 기능
+4. 손쉬운 전화연결로 근무 조건 협의 가능
+
+<br/>
+<br/>
+
+## User Flow
+
+### 🎈 구직자 [일자리 찾기]
+
+![구직자_유저플로우](https://github.com/goormthon/.github/assets/102462534/cf41b316-b5d1-479f-99d0-502cac322383)
+
+<br/>
+
+### 🍒 구인자 [일할 사람 찾기]
+
+![구인자_유저플로우](https://github.com/goormthon/.github/assets/102462534/75e6b7b8-eba7-4cc6-bdef-b0212a942d26)
+![구인자_유저플로우2](https://github.com/goormthon/.github/assets/102462534/ac90809f-f95a-46e7-8588-2f8743d42cdd)
+
+![footer](https://capsule-render.vercel.app/api?section=footer&type=waving&color=0:f2ab46,100:FFC000)
